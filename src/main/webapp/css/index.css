@@ -1,0 +1,20 @@
+.content .title { width: 100%; height: 48px; border-bottom: 1px solid #ccc;}
+
+.pic { float: left; width: 340px; height: 270px;}
+.pictures .odd {
+    width: 339px; overflow: hidden;
+    border-right: 1px solid rgba(0, 0, 0, 0.2);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+}
+.pictures .even {border-bottom: 1px solid rgba(0, 0, 0, 0.2);}
+
+.latest {padding-bottom: 5px;}
+.latest p {height: 32px; border-bottom: 1px solid #ccc;line-height: 32px;}
+.latest a {float: left; display: inline-block; width:140px; height: 110px;}
+
+.latest .odd {
+    width: 139px; overflow: hidden;
+    border-right: 1px solid rgba(0, 0, 0, 0.2);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+}
+.latest .even {border-bottom: 1px solid rgba(0, 0, 0, 0.2);}
