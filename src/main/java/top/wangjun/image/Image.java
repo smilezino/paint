@@ -57,10 +57,6 @@ public class Image {
         Graphics2D graphics = image.createGraphics();
         graphics.drawImage(this.bufferedImage, 0, 0, width, height, null);
         graphics.dispose();
-        graphics.setComposite(AlphaComposite.Src);
-        graphics.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
-        graphics.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
-        graphics.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         this.bufferedImage = image;
         return this;
     }
@@ -136,10 +132,6 @@ public class Image {
         Graphics2D graphics = image.createGraphics();
         graphics.drawImage(this.bufferedImage, 0, 0, width, height, null);
         graphics.dispose();
-        graphics.setComposite(AlphaComposite.Src);
-        graphics.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
-        graphics.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
-        graphics.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         this.bufferedImage = image;
         return this;
     }
@@ -163,10 +155,6 @@ public class Image {
         graphics.fillRect(0, height, this.bufferedImage.getWidth(), 1);
 
         graphics.dispose();
-        graphics.setComposite(AlphaComposite.Src);
-        graphics.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
-        graphics.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
-        graphics.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         return this;
     }
 
@@ -184,10 +172,6 @@ public class Image {
         graphics.setColor(color);
         graphics.fillRect(x, y, width, height);
         graphics.dispose();
-        graphics.setComposite(AlphaComposite.Src);
-        graphics.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
-        graphics.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
-        graphics.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         return this;
     }
 
@@ -197,6 +181,11 @@ public class Image {
     }
 
     public void write(File file) throws IOException {
+		Graphics2D graphics = this.bufferedImage.createGraphics();
+		graphics.setComposite(AlphaComposite.Src);
+		graphics.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
+		graphics.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
+		graphics.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         ImageIO.write(this.bufferedImage, this.getImageExtension(), file);
         this.bufferedImage = this.originImage;
     }
