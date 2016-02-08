@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.*;
 
-public class Photos implements Serializable {
+public class Photo implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -13,7 +13,7 @@ public class Photos implements Serializable {
 
     private Integer album;
 
-    private String name;
+    private String title;
 
     private String filename;
 
@@ -23,7 +23,11 @@ public class Photos implements Serializable {
 
     private Integer height;
 
+    private String origin;
+
     private String thumb;
+
+    private String note;
 
     @Column(name = "view_count")
     private Integer viewCount;
@@ -84,17 +88,17 @@ public class Photos implements Serializable {
     }
 
     /**
-     * @return name
+     * @return title
      */
-    public String getName() {
-        return name;
+    public String getTitle() {
+        return title;
     }
 
     /**
-     * @param name
+     * @param title
      */
-    public void setName(String name) {
-        this.name = name;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     /**
@@ -154,6 +158,20 @@ public class Photos implements Serializable {
     }
 
     /**
+     * @return origin
+     */
+    public String getOrigin() {
+        return origin;
+    }
+
+    /**
+     * @param origin
+     */
+    public void setOrigin(String origin) {
+        this.origin = origin;
+    }
+
+    /**
      * @return thumb
      */
     public String getThumb() {
@@ -165,6 +183,20 @@ public class Photos implements Serializable {
      */
     public void setThumb(String thumb) {
         this.thumb = thumb;
+    }
+
+    /**
+     * @return note
+     */
+    public String getNote() {
+        return note;
+    }
+
+    /**
+     * @param note
+     */
+    public void setNote(String note) {
+        this.note = note;
     }
 
     /**

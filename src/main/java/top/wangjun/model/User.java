@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.*;
 
-public class Users implements Serializable {
+public class User implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -18,6 +18,16 @@ public class Users implements Serializable {
     private String avator;
 
     private String nickname;
+
+    private String intro;
+
+    private String qq;
+
+    private String weixin;
+
+    private String weibo;
+
+    private String bilibili;
 
     private Byte role;
 
@@ -116,6 +126,76 @@ public class Users implements Serializable {
      */
     public void setNickname(String nickname) {
         this.nickname = nickname;
+    }
+
+    /**
+     * @return intro
+     */
+    public String getIntro() {
+        return intro;
+    }
+
+    /**
+     * @param intro
+     */
+    public void setIntro(String intro) {
+        this.intro = intro;
+    }
+
+    /**
+     * @return qq
+     */
+    public String getQq() {
+        return qq;
+    }
+
+    /**
+     * @param qq
+     */
+    public void setQq(String qq) {
+        this.qq = qq;
+    }
+
+    /**
+     * @return weixin
+     */
+    public String getWeixin() {
+        return weixin;
+    }
+
+    /**
+     * @param weixin
+     */
+    public void setWeixin(String weixin) {
+        this.weixin = weixin;
+    }
+
+    /**
+     * @return weibo
+     */
+    public String getWeibo() {
+        return weibo;
+    }
+
+    /**
+     * @param weibo
+     */
+    public void setWeibo(String weibo) {
+        this.weibo = weibo;
+    }
+
+    /**
+     * @return bilibili
+     */
+    public String getBilibili() {
+        return bilibili;
+    }
+
+    /**
+     * @param bilibili
+     */
+    public void setBilibili(String bilibili) {
+        this.bilibili = bilibili;
     }
 
     /**

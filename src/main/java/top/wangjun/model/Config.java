@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.*;
 
-public class Configs implements Serializable {
+public class Config implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -15,7 +15,7 @@ public class Configs implements Serializable {
 
     private String value;
 
-    private String comments;
+    private String memo;
 
     private Byte status;
 
@@ -84,17 +84,17 @@ public class Configs implements Serializable {
     }
 
     /**
-     * @return comments
+     * @return memo
      */
-    public String getComments() {
-        return comments;
+    public String getMemo() {
+        return memo;
     }
 
     /**
-     * @param comments
+     * @param memo
      */
-    public void setComments(String comments) {
-        this.comments = comments;
+    public void setMemo(String memo) {
+        this.memo = memo;
     }
 
     /**

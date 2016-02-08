@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.*;
 
-public class Albums implements Serializable {
+public class Album implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -12,6 +12,8 @@ public class Albums implements Serializable {
     private Integer user;
 
     private String name;
+
+    private String memo;
 
     private Byte status;
 
@@ -63,6 +65,20 @@ public class Albums implements Serializable {
      */
     public void setName(String name) {
         this.name = name;
+    }
+
+    /**
+     * @return memo
+     */
+    public String getMemo() {
+        return memo;
+    }
+
+    /**
+     * @param memo
+     */
+    public void setMemo(String memo) {
+        this.memo = memo;
     }
 
     /**
