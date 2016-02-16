@@ -18,7 +18,7 @@
 
         <jdbcConnection driverClass="${jdbc.driverClass}"
                         connectionURL="${jdbc.url}"
-                        userId="${jdbc.user}"
+                        userId="${jdbc.username}"
                         password="${jdbc.password}">
         </jdbcConnection>
 
