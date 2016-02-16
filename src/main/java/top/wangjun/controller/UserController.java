@@ -17,4 +17,9 @@ public class UserController {
 	public String upload() {
 		return "upload";
 	}
+
+	@RequestMapping("login")
+	public String login() {
+		return "login";
+	}
 }
