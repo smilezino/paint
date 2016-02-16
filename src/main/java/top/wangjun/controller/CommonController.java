@@ -10,9 +10,22 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 public class CommonController {
 
-	@RequestMapping("test")
-	@ResponseBody
-	public String test() {
-		return "test";
+	/**
+	 * 首页
+	 * @return
+	 */
+	@RequestMapping({"/", "index"})
+	public String index() {
+		return "index";
+	}
+
+	@RequestMapping("album")
+	public String album() {
+		return "album";
+	}
+
+	@RequestMapping("item")
+	public String item() {
+		return "item";
 	}
 }

@@ -1,0 +1,19 @@
+#set($layout = "layout/_index.vm")
+
+<link rel="stylesheet" href="/css/index.css" />
+
+<div class="content">
+	<div class="title">
+		<i class="fa fa-folder-open"></i> 图册名称
+	</div>
+	<div class="pictures">
+		<a class="pic" href="#"><img src="http://placehold.it/340x270/a61/1a1"/></a>
+		<a class="pic" href="#"><img src="http://placehold.it/340x270/1aa/1a1"/></a>
+		<a class="pic" href="#"><img src="http://placehold.it/340x270/fff/aa1"/></a>
+		<a class="pic" href="#"><img src="http://placehold.it/340x270/a61/1a1"/></a>
+		<a class="pic" href="#"><img src="http://placehold.it/340x270/fff/1a3"/></a>
+		<a class="pic" href="#"><img src="http://placehold.it/340x270/fff/1a1"/></a>
+		<a class="pic" href="#"><img src="http://placehold.it/340x270/fff/1a1"/></a>
+	</div>
+
+</div>

@@ -1,0 +1,16 @@
+<div class="header">
+	<div class="wp cf">
+		<div class="header-left">
+			<a href="/wangjun/index" class="logo">WANGJUN</a>
+			<ul class="header-nav">
+				<li>
+					<a href="/wangjun/albums">Album</a>
+				</li>
+			</ul>
+		</div>
+		<div class="header-right">
+			<a href="#"><i class="fa fa-qq"></i> QQ</a>
+			<a href="#"><i class="fa fa-weibo"></i> 微博</a>
+		</div>
+	</div>
+</div>

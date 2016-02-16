@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta charset="UTF-8">
+	<title>$!{page_title}</title>
+	<link rel="stylesheet" href="/css/font-awesome/css/font-awesome.min.css">
+	<script src="/js/jquery-2.1.1.min.js"></script>
+</head>
+<body>
+#parse("_header.vm")
+<div class="main wp cf">
+	#include("_sides.vm")
+
+	$screen_content
+</div>
+#parse("_footer.vm")
+</body>
+</html>

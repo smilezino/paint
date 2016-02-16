@@ -382,33 +382,18 @@ html, body {
       vertical-align: middle;
       max-width: 540px; }
   .setting input[type="text"] {
-    width: 500px;
+    width: 400px;
     border-radius: 3px;
     padding: 5px;
     font-size: 14px;
     border: 1px solid #ccc; }
   .setting textarea {
-    width: 500px;
+    width: 400px;
     height: 100px;
     border-radius: 3px;
     padding: 5px;
     font-size: 14px;
     border: 1px solid #ccc; }
-  .setting input[type="file"] {
-    display: none; }
-  .setting .file-upload {
-    max-width: 540px;
-    overflow: hidden;
-    border: 1px solid #ccc; }
-    .setting .file-upload .file-upload-cover {
-      width: 510px;
-      height: 80px;
-      line-height: 80px;
-      text-align: center;
-      cursor: pointer;
-      color: #ccc; }
-      .setting .file-upload .file-upload-cover .fa {
-        font-size: 24px; }
   .setting .fa-toggle-off, .setting .fa-toggle-on {
     font-size: 24px;
     color: #878787;
@@ -507,33 +492,31 @@ body {
   .images .pic:nth-child(even) {
     border-bottom: 1px solid rgba(0, 0, 0, 0.2); }
 
-.content .title {
-  height: 48px;
-  line-height: 48px;
-  font-size: 16px;
-  padding-left: 15px;
-  border-bottom: 1px solid #ccc;
-  color: #778087; }
-
-.pictures {
+.content .albums {
   *zoom: 1; }
-  .pictures:before, .pictures:after {
+  .content .albums:before, .content .albums:after {
     content: "";
     display: table; }
-  .pictures:after {
+  .content .albums:after {
     clear: both;
     overflow: hidden; }
-  .pictures .pic {
+  .content .albums .album {
     float: left;
-    width: 340px;
-    height: 270px; }
-    .pictures .pic img {
-      width: 340px;
-      height: 270px; }
-  .pictures .pic:nth-child(odd) {
-    width: 339px;
-    overflow: hidden;
-    border-right: 1px solid rgba(0, 0, 0, 0.1);
-    border-bottom: 1px solid rgba(0, 0, 0, 0.1); }
-  .pictures .pic:nth-child(even) {
-    border-bottom: 1px solid rgba(0, 0, 0, 0.1); }
+    margin: 15px 0 5px 15px;
+    width: 315px; }
+    .content .albums .album:hover .title {
+      color: #4d5256;
+      text-decoration: underline; }
+    .content .albums .album .cover {
+      display: block;
+      width: 313px;
+      height: 250px;
+      border: 1px solid rgba(0, 0, 0, 0.1); }
+    .content .albums .album .title {
+      display: block;
+      font-size: 14px;
+      height: 32px;
+      line-height: 32px;
+      text-align: center; }
+    .content .albums .album:nth-child(even) {
+      margin-left: 20px; }

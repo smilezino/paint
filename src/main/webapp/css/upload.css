@@ -381,6 +381,10 @@ html, body {
       *zoom: 1;
       vertical-align: middle;
       max-width: 540px; }
+  .setting .msg {
+    padding: 10px 0 10px 15px;
+    background-color: #fcf8e3;
+    color: #8a6d3b; }
   .setting input[type="text"] {
     width: 500px;
     border-radius: 3px;
@@ -390,25 +394,53 @@ html, body {
   .setting textarea {
     width: 500px;
     height: 100px;
+    resize: none;
     border-radius: 3px;
+    border: 1px solid #ccc;
     padding: 5px;
-    font-size: 14px;
-    border: 1px solid #ccc; }
+    font-size: 14px; }
   .setting input[type="file"] {
     display: none; }
   .setting .file-upload {
-    max-width: 540px;
+    max-width: 510px;
     overflow: hidden;
+    cursor: pointer;
     border: 1px solid #ccc; }
     .setting .file-upload .file-upload-cover {
       width: 510px;
       height: 80px;
       line-height: 80px;
       text-align: center;
-      cursor: pointer;
       color: #ccc; }
       .setting .file-upload .file-upload-cover .fa {
         font-size: 24px; }
+    .setting .file-upload .image-view {
+      font-size: 0;
+      _line-height: 0;
+      text-align: center;
+      overflow: hidden; }
+      .setting .file-upload .image-view:before, .setting .file-upload .image-view .iecp {
+        display: inline-block;
+        *display: inline;
+        *zoom: 1;
+        vertical-align: middle; }
+      .setting .file-upload .image-view:before, .setting .file-upload .image-view .iecp {
+        content: "";
+        height: 100%;
+        font-size: 0;
+        line-height: 0;
+        width: 0; }
+      .setting .file-upload .image-view img {
+        max-width: 100%;
+        max-height: 100%; }
+      .setting .file-upload .image-view img {
+        display: inline-block;
+        *display: inline;
+        *zoom: 1;
+        vertical-align: middle;
+        font-size: 12px;
+        font-size: 1rem;
+        line-height: normal; }
   .setting .fa-toggle-off, .setting .fa-toggle-on {
     font-size: 24px;
     color: #878787;
@@ -508,32 +540,18 @@ body {
     border-bottom: 1px solid rgba(0, 0, 0, 0.2); }
 
 .content .title {
+  *zoom: 1;
   height: 48px;
   line-height: 48px;
-  font-size: 16px;
-  padding-left: 15px;
   border-bottom: 1px solid #ccc;
-  color: #778087; }
-
-.pictures {
-  *zoom: 1; }
-  .pictures:before, .pictures:after {
+  color: #778087;
+  font-size: 16px;
+  padding-left: 15px; }
+  .content .title:before, .content .title:after {
     content: "";
     display: table; }
-  .pictures:after {
+  .content .title:after {
     clear: both;
     overflow: hidden; }
-  .pictures .pic {
-    float: left;
-    width: 340px;
-    height: 270px; }
-    .pictures .pic img {
-      width: 340px;
-      height: 270px; }
-  .pictures .pic:nth-child(odd) {
-    width: 339px;
-    overflow: hidden;
-    border-right: 1px solid rgba(0, 0, 0, 0.1);
-    border-bottom: 1px solid rgba(0, 0, 0, 0.1); }
-  .pictures .pic:nth-child(even) {
-    border-bottom: 1px solid rgba(0, 0, 0, 0.1); }
+.content select {
+  width: 120px; }

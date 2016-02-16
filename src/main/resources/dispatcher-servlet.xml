@@ -24,7 +24,7 @@
 		<property name="favorParameter" value="true" />
 		<property name="parameterName" value="format" />
 		<property name="useJaf" value="false"/>
-		<property name="defaultContentType" value="application/json" />
+		<property name="defaultContentType" value="text/html" />
 		<property name="mediaTypes">
 			<map>
 				<entry key="json" value="application/json" />
@@ -37,4 +37,8 @@
 			<bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter"/>
 		</mvc:message-converters>
 	</mvc:annotation-driven>
+
+	<mvc:resources mapping="/css/**" location="/css/" />
+	<mvc:resources mapping="/js/**" location="/js/" />
+	<mvc:resources mapping="/uploads/**" location="/upload/" />
 </beans>
