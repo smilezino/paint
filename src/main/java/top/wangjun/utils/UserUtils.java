@@ -17,10 +17,10 @@ public class UserUtils {
 		if(StringUtils.isBlank(token)) return null;
 		String decryptString = TripleDES.decrypt(token, ContextUtils.getProperty("3des.key"));
 		if(StringUtils.isBlank(decryptString)) return null;
-		String[] parts = decryptString.split("|");
+		String[] parts = StringUtils.split(decryptString, "|");
 		User user = new User();
 		user.setId(Integer.valueOf(parts[0]));
-		user.setPwd(parts[3]);
+		user.setPwd(parts[1]);
 		return user;
 	}
 }

@@ -22,6 +22,19 @@ $('#file-image').change(function (event) {
     handleFile(event.target.files);
 });
 
+$('.js-toggle').click(function() {
+    var $this = $(this);
+    var isOn = $this.hasClass('fa-toggle-on');
+    if(isOn) {
+        $this.removeClass('fa-toggle-on');
+        $this.addClass('fa-toggle-off')
+        $this.siblings('input').val(0);
+    } else {
+        $this.addClass('fa-toggle-on');
+        $this.removeClass('fa-toggle-off')
+        $this.siblings('input').val(1);
+    }
+});
 
 var dropbox = $('.file-upload-cover').get(0);
 dropbox.addEventListener("dragenter", dragenter, false);
@@ -40,8 +53,9 @@ function drop(e) {
     e.stopPropagation();
     e.preventDefault();
 
-    var dt = e.dataTransfer;
-    var files = dt.files;
+    var files = e.dataTransfer.files;
+
+    $('#file-image').get(0).files = files;
 
     handleFile(files);
 }

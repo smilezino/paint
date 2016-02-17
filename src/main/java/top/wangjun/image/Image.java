@@ -81,7 +81,7 @@ public class Image {
      * @return
      */
     public Image watermark(String text) {
-        return this.watermark(text, Position.RIGHT_BOTTOM);
+        return this.watermark(text, WatermarkPosition.RIGHT_BOTTOM);
     }
 
     /**
@@ -90,7 +90,7 @@ public class Image {
      * @param position
      * @return
      */
-    public Image watermark(String text, Position position) {
+    public Image watermark(String text, WatermarkPosition position) {
         Graphics2D graphics = this.bufferedImage.createGraphics();
 
         //set font
@@ -181,6 +181,9 @@ public class Image {
     }
 
     public void write(File file) throws IOException {
+		if(!file.getParentFile().exists()) {
+			file.mkdirs();
+		}
 		Graphics2D graphics = this.bufferedImage.createGraphics();
 		graphics.setComposite(AlphaComposite.Src);
 		graphics.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
@@ -210,15 +213,15 @@ public class Image {
      * @param position
      * @return
      */
-    private Point calculatePosition(int imageWidth, int imageHeight, int textWidth, int textHeight, Position position) {
+    private Point calculatePosition(int imageWidth, int imageHeight, int textWidth, int textHeight, WatermarkPosition position) {
         int x = (imageWidth - textWidth) / 2;
         int y = (imageHeight - textHeight) / 2;
 
-        if(Position.CENTER.equals(position)) {
+        if(WatermarkPosition.CENTER.equals(position)) {
             y = (imageHeight + textHeight) / 2;
         }
 
-        if(Position.RIGHT_BOTTOM.equals(position)) {
+        if(WatermarkPosition.RIGHT_BOTTOM.equals(position)) {
             if(x > DEFAULT_SPACING) {
                 x = imageWidth - textWidth - DEFAULT_SPACING;
             } else {
@@ -232,7 +235,7 @@ public class Image {
             }
         }
 
-        if(Position.RIGHT_TOP.equals(position)) {
+        if(WatermarkPosition.RIGHT_TOP.equals(position)) {
             if(x > DEFAULT_SPACING) {
                 x = imageWidth - textWidth - DEFAULT_SPACING;
             } else {
@@ -244,7 +247,7 @@ public class Image {
             }
         }
 
-        if(Position.LEFT_BOTTOM.equals(position)) {
+        if(WatermarkPosition.LEFT_BOTTOM.equals(position)) {
             if(x > DEFAULT_SPACING) {
                 x = DEFAULT_SPACING;
             }
@@ -256,7 +259,7 @@ public class Image {
             }
         }
 
-        if(Position.LEFT_TOP.equals(position)) {
+        if(WatermarkPosition.LEFT_TOP.equals(position)) {
             if(x > DEFAULT_SPACING) {
                 x = DEFAULT_SPACING;
             }
@@ -275,38 +278,6 @@ public class Image {
         private Point(int x, int y) {
             this.x = x;
             this.y = y;
-        }
-    }
-
-    public enum Position {
-        RIGHT_BOTTOM(1, "右下"),
-        RIGHT_TOP(2, "右上"),
-        LEFT_BOTTOM(3, "左下"),
-        LEFT_TOP(4, "左上"),
-        CENTER(5, "居中");
-
-        private int position;
-        private String description;
-
-        public int getPosition() {
-            return position;
-        }
-
-        public void setPosition(int position) {
-            this.position = position;
-        }
-
-        public String getDescription() {
-            return description;
-        }
-
-        public void setDescription(String description) {
-            this.description = description;
-        }
-
-        Position(int position, String description) {
-            this.position = position;
-            this.description = description;
         }
     }
 

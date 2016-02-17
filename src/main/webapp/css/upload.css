@@ -411,6 +411,9 @@ html, body {
       height: 80px;
       line-height: 80px;
       text-align: center;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      user-select: none;
       color: #ccc; }
       .setting .file-upload .file-upload-cover .fa {
         font-size: 24px; }
@@ -444,7 +447,10 @@ html, body {
   .setting .fa-toggle-off, .setting .fa-toggle-on {
     font-size: 24px;
     color: #878787;
-    cursor: pointer; }
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none; }
   .setting .fa-toggle-on {
     color: #3f79ff; }
 

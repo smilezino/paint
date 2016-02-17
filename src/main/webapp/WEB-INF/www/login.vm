@@ -48,6 +48,16 @@
 
 <script>
 	$('.submit').click(function(){
-		$('#login').submit();
+		login();
 	});
+
+	$('body').bind('keypress', function(e){
+		if(e.keyCode == 13) {
+			login();
+		}
+	});
+
+	function login() {
+		$('#login').submit();
+	}
 </script>

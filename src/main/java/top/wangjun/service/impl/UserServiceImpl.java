@@ -25,7 +25,7 @@ public class UserServiceImpl implements IUserService {
 	@Override
 	public User login(Integer id, String password) {
 		User user = this.getBetween(id, null, null);
-		return user!=null && user.getPwd().equals(DigestUtils.md5Hex(password)) ? user : null;
+		return user!=null && user.getPwd().equals(password) ? user : null;
 	}
 
 	@Override

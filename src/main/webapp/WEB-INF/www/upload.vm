@@ -11,10 +11,22 @@
 		</div>
 	</div>
 	<div class="setting">
-		<div class="msg">
-			<i class="fa fa-warning"></i>
-			<span>文件格式不正确</span>
-		</div>
+	<form id="upload" action="/upload" method="post" enctype="multipart/form-data">
+		#if($error)
+			<div class="msg">
+				<i class="fa fa-warning"></i>
+				<span>$error</span>
+			</div>
+		#end
+
+		#if($photoId)
+			<div class="msg">
+				<i class="fa fa-info-circle"></i>
+				<span>上传成功!</span>
+				<a href="/item/$photoId">查看</a>
+			</div>
+		#end
+
 
 		<div class="set-item">
 			<span class="label">选择文件</span>
@@ -35,44 +47,63 @@
 		<div class="set-item">
 			<span class="label">标题</span>
 			<div class="input-item">
-				<input type="text" name="name"/>
+				<input type="text" name="title"/>
 			</div>
 		</div>
 
 		<div class="set-item">
 			<span class="label">水印</span>
 			<div class="input-item">
-				<select>
-					<option value="1">选项1</option>
-					<option value="2">选项2</option>
-					<option value="3">选项3</option>
+				<select name="watermark">
+					<option value="0">无</option>
+					<option value="1">右下</option>
+					<option value="2">右上</option>
+					<option value="3">左下</option>
+					<option value="4">左上</option>
+					<option value="5">居中</option>
 				</select>
 			</div>
 		</div>
 
 		<div class="set-item">
-			<span class="label">Radio</span>
+			<span class="label">开放下载</span>
 			<div class="input-item">
-				<i class="fa fa-toggle-off"></i>
-				<i class="fa fa-toggle-on"></i>
+				<input type="hidden" name="status" value="0">
+				<i class="fa fa-toggle-off js-toggle"></i>
 			</div>
 		</div>
 
 		<div class="set-item">
 			<span class="label">说明</span>
 			<div class="input-item">
-				<textarea></textarea>
+				<textarea name="note"></textarea>
 			</div>
 		</div>
 
 		<div class="set-item">
 			<span class="label"></span>
 			<div class="input-item">
-				<a href="javascript:;" class="btn">确定</a>
+				<a href="javascript:;" class="btn submit">确定</a>
 			</div>
 		</div>
+	</form>
 	</div>
 
 </div>
 
 <script src="/js/upload.js"></script>
+<script>
+	$('.submit').click(function(){
+		login();
+	});
+
+	$('body').bind('keypress', function(e){
+		if(e.keyCode == 13) {
+			login();
+		}
+	});
+
+	function login() {
+		$('#upload').submit();
+	}
+</script>

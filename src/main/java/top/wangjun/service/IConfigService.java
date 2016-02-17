@@ -5,4 +5,5 @@ package top.wangjun.service;
  * @date 2016-02-08 19:53
  */
 public interface IConfigService {
+	public String getWatermarkText();
 }

@@ -21,11 +21,10 @@ public class CoreInterceptor extends HandlerInterceptorAdapter {
 
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-		User user = this.getUser(request);
-
-		request.setAttribute(Constants.CURRENT_USER_KEY, user);
 
 		if(handler instanceof HandlerMethod) {
+			User user = this.getUser(request);
+			request.setAttribute(Constants.CURRENT_USER_KEY, user);
 			HandlerMethod handlerMethod = (HandlerMethod) handler;
 			AuthRequired loginRequired = handlerMethod.getMethodAnnotation(AuthRequired.class);
 
