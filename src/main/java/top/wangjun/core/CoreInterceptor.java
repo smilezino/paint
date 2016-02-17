@@ -6,6 +6,8 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 import top.wangjun.model.User;
 import top.wangjun.service.IUserService;
+import top.wangjun.utils.CookieUtils;
+import top.wangjun.utils.UserUtils;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -19,9 +21,9 @@ public class CoreInterceptor extends HandlerInterceptorAdapter {
 
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-		User user = getUser(request);
+		User user = this.getUser(request);
 
-		request.setAttribute(Constants.CURRENT_ACCOUNT_KEY, user);
+		request.setAttribute(Constants.CURRENT_USER_KEY, user);
 
 		HandlerMethod handlerMethod = (HandlerMethod) handler;
 		AuthRequired loginRequired = handlerMethod.getMethodAnnotation(AuthRequired.class);
@@ -39,7 +41,7 @@ public class CoreInterceptor extends HandlerInterceptorAdapter {
 
 		if(!modelAndView.getViewName().contains("redirect")) {
 			modelAndView.addObject("user", userService.admin());
-			modelAndView.addObject("login", getUser(request) != null);
+			modelAndView.addObject("login", this.getUser(request) != null);
 			modelAndView.addObject("today", new Date());
 			modelAndView.addObject("currentUrl", request.getRequestURL().toString());
 			modelAndView.addObject("queryString", request.getQueryString());
@@ -48,6 +50,8 @@ public class CoreInterceptor extends HandlerInterceptorAdapter {
 	}
 
 	private User getUser(HttpServletRequest request) {
-		return null;
+		String token = CookieUtils.getCookieValue(request, Constants.USER_COOKIE_TOKEN);
+		User cookieUser = UserUtils.decrypt(token);
+		return userService.login(cookieUser.getId(), cookieUser.getPwd());
 	}
 }

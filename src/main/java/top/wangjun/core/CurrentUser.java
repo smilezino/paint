@@ -8,5 +8,5 @@ import java.lang.annotation.Target;
 @Target({ElementType.PARAMETER})
 @Retention(RetentionPolicy.RUNTIME)
 public @interface CurrentUser {
-	String value() default Constants.CURRENT_ACCOUNT_KEY;
+	String value() default Constants.CURRENT_USER_KEY;
 }

@@ -34,7 +34,7 @@
 	</bean>
 	<mvc:annotation-driven content-negotiation-manager="contentNegotiationManager">
 		<mvc:argument-resolvers>
-			<bean id="currentAccountMethodArgumentResolver" class="top.wangjun.core.CurrentAccountMethodArgumentResolver" />
+			<bean id="currentAccountMethodArgumentResolver" class="top.wangjun.core.CurrentUserMethodArgumentResolver" />
 		</mvc:argument-resolvers>
 
 		<mvc:message-converters>

@@ -1,31 +1,31 @@
 package top.wangjun.utils;
 
 import org.springframework.beans.BeansException;
+import org.springframework.beans.factory.InitializingBean;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.stereotype.Component;
-import org.springframework.web.context.ServletContextAware;
 
-import javax.servlet.ServletContext;
-import java.io.File;
+import java.util.Properties;
 
 /**
  * 上下文
  */
 @Component
-public class ContextUtils implements ApplicationContextAware, ServletContextAware{
+public class ContextUtils implements ApplicationContextAware, InitializingBean {
 
 	private static ApplicationContext applicationContext;
 
-	private static ServletContext servletContext;
+	private static Properties properties;
 
 	public static Object getBean(String name) {
 		return applicationContext.getBean(name);
 	}
 
-	public static String getWebrootPath() {
-		return servletContext.getRealPath(File.separator);
+	public static String getProperty(String key) {
+		return (String) properties.get(key);
 	}
+
 
 	@Override
 	public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
@@ -33,7 +33,7 @@ public class ContextUtils implements ApplicationContextAware, ServletContextAwar
 	}
 
 	@Override
-	public void setServletContext(ServletContext servletContext) {
-		ContextUtils.servletContext = servletContext;
+	public void afterPropertiesSet() throws Exception {
+		properties = (Properties) ContextUtils.applicationContext.getBean("properties");
 	}
 }

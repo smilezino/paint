@@ -9,7 +9,7 @@ import org.springframework.web.method.support.ModelAndViewContainer;
 /**
  * controller方法中, 支持使用@CurrentUser注解获取当前账户信息
  */
-public class CurrentAccountMethodArgumentResolver implements HandlerMethodArgumentResolver {
+public class CurrentUserMethodArgumentResolver implements HandlerMethodArgumentResolver {
 	@Override
 	public boolean supportsParameter(MethodParameter parameter) {
 		return parameter.hasParameterAnnotation(CurrentUser.class);
