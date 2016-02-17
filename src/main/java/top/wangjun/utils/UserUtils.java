@@ -10,12 +10,12 @@ public class UserUtils {
 
 	public static String encrypt(User user) {
 		if(user == null) return null;
-		return TripleDES.encrypt(user.getId() + "|" + user.getPwd(), ContextUtils.getProperty("3ds.key"));
+		return TripleDES.encrypt(user.getId() + "|" + user.getPwd(), ContextUtils.getProperty("3des.key"));
 	}
 
 	public static User decrypt(String token) {
 		if(StringUtils.isBlank(token)) return null;
-		String decryptString = TripleDES.decrypt(token, ContextUtils.getProperty("3ds.key"));
+		String decryptString = TripleDES.decrypt(token, ContextUtils.getProperty("3des.key"));
 		if(StringUtils.isBlank(decryptString)) return null;
 		String[] parts = decryptString.split("|");
 		User user = new User();

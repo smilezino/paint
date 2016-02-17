@@ -5,6 +5,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import top.wangjun.core.AuthRequired;
 import top.wangjun.core.Constants;
 import top.wangjun.model.Photo;
 import top.wangjun.model.User;
@@ -22,11 +23,13 @@ public class UserController {
 	@Resource
 	private IUserService userService;
 
+	@AuthRequired
 	@RequestMapping(value = "/upload", method = RequestMethod.POST)
 	public String upload(Photo photo) {
 		return "upload";
 	}
 
+	@AuthRequired
 	@RequestMapping(value = "/upload", method = RequestMethod.GET)
 	public String upload() {
 		return "upload";
@@ -46,9 +49,10 @@ public class UserController {
 		User user = this.userService.login(identity, password);
 		if(user != null) {
 			CookieUtils.setCookie(request, response, Constants.USER_COOKIE_TOKEN, UserUtils.encrypt(user), 30 * 24 * 60 * 60);
-			return "index";
+			return "redirect:/";
 		} else {
-			modelMap.put("error", "loginError");
+			modelMap.put("error", "用户名密码不正确");
+			modelMap.put("identity", identity);
 			return "login";
 		}
 

@@ -25,12 +25,15 @@ public class CoreInterceptor extends HandlerInterceptorAdapter {
 
 		request.setAttribute(Constants.CURRENT_USER_KEY, user);
 
-		HandlerMethod handlerMethod = (HandlerMethod) handler;
-		AuthRequired loginRequired = handlerMethod.getMethodAnnotation(AuthRequired.class);
+		if(handler instanceof HandlerMethod) {
+			HandlerMethod handlerMethod = (HandlerMethod) handler;
+			AuthRequired loginRequired = handlerMethod.getMethodAnnotation(AuthRequired.class);
 
-		if(loginRequired != null && loginRequired.login() && user==null) {
-			throw new UnloginException();
+			if(loginRequired != null && loginRequired.login() && user==null) {
+				throw new UnloginException();
+			}
 		}
+
 
 		return super.preHandle(request, response, handler);
 	}
@@ -52,6 +55,7 @@ public class CoreInterceptor extends HandlerInterceptorAdapter {
 	private User getUser(HttpServletRequest request) {
 		String token = CookieUtils.getCookieValue(request, Constants.USER_COOKIE_TOKEN);
 		User cookieUser = UserUtils.decrypt(token);
+		if(cookieUser == null) return null;
 		return userService.login(cookieUser.getId(), cookieUser.getPwd());
 	}
 }
