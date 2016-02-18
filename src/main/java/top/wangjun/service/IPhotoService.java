@@ -13,6 +13,8 @@ import java.util.List;
  */
 public interface IPhotoService {
 	public Photo findById(Integer id);
+	public List<Photo> findByUser(Integer userId);
+	public Page<Photo> findPageByUser(Integer userId, Integer p, Integer ps);
 	public List<Photo> findByAlbum(Integer albumId);
 	public Page<Photo> findPageByAlbum(Integer albumId, Integer p, Integer ps);
 	public Photo upload(Photo photo, int watermark, MultipartFile file) throws IOException;

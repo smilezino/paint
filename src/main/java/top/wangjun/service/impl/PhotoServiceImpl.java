@@ -6,6 +6,7 @@ import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.io.FilenameUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
+import tk.mybatis.mapper.entity.Example;
 import top.wangjun.dao.PhotoMapper;
 import top.wangjun.image.Image;
 import top.wangjun.image.ImageProcessor;
@@ -34,6 +35,20 @@ public class PhotoServiceImpl implements IPhotoService {
 	@Override
 	public Photo findById(Integer id) {
 		return mapper.selectByPrimaryKey(id);
+	}
+
+	@Override
+	public List<Photo> findByUser(Integer userId) {
+		Photo record = new Photo();
+		record.setUser(userId);
+		return mapper.select(record);
+	}
+
+	@Override
+	public Page<Photo> findPageByUser(Integer userId, Integer p, Integer ps) {
+		PageHelper.startPage(p, ps, "id desc");
+		List<Photo> list = this.findByUser(userId);
+		return (Page<Photo>) list;
 	}
 
 	@Override
