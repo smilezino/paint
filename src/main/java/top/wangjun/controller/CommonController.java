@@ -36,6 +36,6 @@ public class CommonController {
 
 	@RequestMapping("/500")
 	public String error500() {
-		return "404";
+		return "500";
 	}
 }

@@ -292,20 +292,8 @@ html, body {
     *display: inline;
     *zoom: 1;
     vertical-align: middle;
-    width: 55px;
-    height: 20px;
-    line-height: 20px;
-    text-align: center;
-    border: 1px solid #778087;
-    -webkit-border-radius: 4px;
-    -moz-border-radius: 4px;
-    -ms-border-radius: 4px;
-    -o-border-radius: 4px;
-    border-radius: 4px;
-    color: #778087; }
-    .page a:hover {
-      border-color: #4d5256;
-      color: #4d5256; }
+    width: 30px;
+    text-align: center; }
     .page a.prev {
       float: left;
       margin-left: 15px; }
@@ -373,6 +361,99 @@ html, body {
   text-overflow: ellipsis;
   line-height: 1.4; }
 
+.setting {
+  font-size: 14px;
+  color: #778087; }
+  .setting .set-item {
+    vertical-align: middle;
+    margin-top: 20px; }
+    .setting .set-item .label {
+      display: inline-block;
+      *display: inline;
+      *zoom: 1;
+      vertical-align: middle;
+      width: 100px;
+      margin-right: 20px;
+      text-align: right; }
+    .setting .set-item .input-item {
+      display: inline-block;
+      *display: inline;
+      *zoom: 1;
+      vertical-align: middle;
+      max-width: 540px; }
+  .setting .msg {
+    padding: 10px 0 10px 15px;
+    background-color: #fcf8e3;
+    color: #8a6d3b; }
+  .setting input[type="text"], .setting input[type="password"] {
+    width: 500px;
+    border-radius: 3px;
+    padding: 5px;
+    font-size: 14px;
+    border: 1px solid #ccc; }
+  .setting textarea {
+    width: 500px;
+    height: 100px;
+    resize: none;
+    border-radius: 3px;
+    border: 1px solid #ccc;
+    padding: 5px;
+    font-size: 14px; }
+  .setting input[type="file"] {
+    display: none; }
+  .setting .file-upload {
+    max-width: 510px;
+    overflow: hidden;
+    cursor: pointer;
+    border: 1px solid #ccc; }
+    .setting .file-upload .file-upload-cover {
+      width: 510px;
+      height: 80px;
+      line-height: 80px;
+      text-align: center;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      user-select: none;
+      color: #ccc; }
+      .setting .file-upload .file-upload-cover .fa {
+        font-size: 24px; }
+    .setting .file-upload .image-view {
+      font-size: 0;
+      _line-height: 0;
+      text-align: center;
+      overflow: hidden; }
+      .setting .file-upload .image-view:before, .setting .file-upload .image-view .iecp {
+        display: inline-block;
+        *display: inline;
+        *zoom: 1;
+        vertical-align: middle; }
+      .setting .file-upload .image-view:before, .setting .file-upload .image-view .iecp {
+        content: "";
+        height: 100%;
+        font-size: 0;
+        line-height: 0;
+        width: 0; }
+      .setting .file-upload .image-view img {
+        max-width: 100%;
+        max-height: 100%; }
+      .setting .file-upload .image-view img {
+        display: inline-block;
+        *display: inline;
+        *zoom: 1;
+        vertical-align: middle;
+        font-size: 12px;
+        font-size: 1rem;
+        line-height: normal; }
+  .setting .fa-toggle-off, .setting .fa-toggle-on {
+    font-size: 24px;
+    color: #878787;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none; }
+  .setting .fa-toggle-on {
+    color: #3f79ff; }
+
 .left {
   float: left; }
 
@@ -398,13 +479,59 @@ body {
   background-color: #e2e2e2;
   font-family: "Helvetica Neue", "Luxi Sans", "DejaVu Sans", Tahoma, "Hiragino Sans GB", "Microsoft Yahei", sans-serif; }
 
+.btn {
+  position: relative;
+  display: inline-block;
+  padding: 3px 15px;
+  font-size: 12px;
+  height: 20px;
+  line-height: 20px;
+  color: #778087;
+  white-space: nowrap;
+  vertical-align: middle;
+  cursor: pointer;
+  background-color: #eee;
+  background-image: -webkit-linear-gradient(#fcfcfc, #eee);
+  background-image: linear-gradient(#fcfcfc, #eee);
+  border: 1px solid #ccc;
+  border-radius: 3px; }
+  .btn:hover {
+    background-color: #dcdcdc;
+    background-image: -webkit-linear-gradient(#f1f1f1, #dcdcdc);
+    background-image: linear-gradient(#f1f1f1, #dcdcdc);
+    border: 1px solid #bbb; }
+  .btn:active {
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.15);
+    border-color: #bdbdbd;
+    background-color: #bdbdbd; }
+
 .content {
   float: left;
   width: 680px;
-  min-height: 400px;
+  padding-bottom: 20px;
   background-color: #fff;
   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.15);
   border-radius: 3px; }
+  .content .content-nav {
+    *zoom: 1;
+    width: 100%;
+    height: 48px;
+    line-height: 48px;
+    border-bottom: 1px solid #ccc;
+    color: #778087; }
+    .content .content-nav:before, .content .content-nav:after {
+      content: "";
+      display: table; }
+    .content .content-nav:after {
+      clear: both;
+      overflow: hidden; }
+    .content .content-nav .content-title {
+      float: left;
+      padding-left: 15px;
+      font-size: 16px; }
+    .content .content-nav .content-options {
+      float: right;
+      margin-right: 15px; }
 
 .sides {
   float: right;
@@ -438,37 +565,19 @@ body {
   .images .pic:nth-child(even) {
     border-bottom: 1px solid rgba(0, 0, 0, 0.2); }
 
-.content .title {
-  *zoom: 1;
-  width: 100%;
-  height: 48px;
-  line-height: 48px;
-  border-bottom: 1px solid #ccc;
-  color: #778087; }
-  .content .title:before, .content .title:after {
-    content: "";
-    display: table; }
-  .content .title:after {
-    clear: both;
-    overflow: hidden; }
-  .content .title .album {
-    float: left;
-    padding-left: 15px;
-    font-size: 16px; }
-  .content .title .share {
-    float: right;
-    font-size: 13px; }
-    .content .title .share li {
-      display: inline-block;
-      *display: inline;
-      *zoom: 1;
-      vertical-align: middle;
-      margin-right: 15px; }
-      .content .title .share li a.dropdown-item {
-        font-size: 12px; }
-        .content .title .share li a.dropdown-item:hover {
-          background-color: #bababa;
-          color: white; }
+.content .content-nav .share {
+  font-size: 13px; }
+  .content .content-nav .share li {
+    display: inline-block;
+    *display: inline;
+    *zoom: 1;
+    vertical-align: middle;
+    margin-right: 15px; }
+    .content .content-nav .share li a.dropdown-item {
+      font-size: 12px; }
+      .content .content-nav .share li a.dropdown-item:hover {
+        background-color: #bababa;
+        color: white; }
 .content .image {
   border-bottom: 1px solid rgba(0, 0, 0, 0.1); }
   .content .image img {

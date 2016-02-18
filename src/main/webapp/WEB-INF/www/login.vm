@@ -6,8 +6,8 @@
 <script src="/css/select/select2.min.js"></script>
 
 <div class="content">
-	<div class="title">
-		<div class="album">
+	<div class="content-nav">
+		<div class="content-title">
 			<i class="fa fa-user"></i> 登陆
 		</div>
 	</div>

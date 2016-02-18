@@ -16,24 +16,28 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * 图片处理工具类
  */
 @Component
-public class ImageProcessor implements ApplicationContextAware, InitializingBean {
+public class ImageProcessor implements InitializingBean {
 
 	public static final String DATE_FORMAT = "yyyy";
 
 	public static final String PREFIX_ORIGIN = "origin";
 	public static final String PREFIX_NORMAL = "uploads";
-	public static final String PREFIX_THUMB = "thumb";
+	public static final String PREFIX_THUMB = "uploads/thumb";
 
 	public static final int NORMAL_IMAGE_WIDTH = 680;
 	public static final int THUMB_IMAGE_WIDTH = 340;
 	public static final int THUMB_IMAGE_HEIGHT = 272;
 	public static final double IMAGE_WIDTH_HEIGHT_SCALE = 1.25;
+
+	private List<String> imageTypes;
 
 	@Value("#{servletContext.getRealPath('/WEB-INF')}")
 	private String servletContextPath;
@@ -42,7 +46,11 @@ public class ImageProcessor implements ApplicationContextAware, InitializingBean
 	private IConfigService configService;
 
 	public boolean isValid(String filename) {
-		return true;
+		String extension = null;
+		if(filename.length() > 0 && filename.lastIndexOf(".") > -1) {
+			extension = filename.substring(filename.lastIndexOf(".") + 1);
+		}
+		return extension != null && this.imageTypes.contains(extension.toLowerCase());
 	}
 
 	public File saveOriginFile(MultipartFile file, String filename) throws IOException {
@@ -113,12 +121,10 @@ public class ImageProcessor implements ApplicationContextAware, InitializingBean
 	}
 
 	@Override
-	public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
-
-	}
-
-	@Override
 	public void afterPropertiesSet() throws Exception {
-		System.out.println(servletContextPath);
+		imageTypes = new ArrayList<>();
+		imageTypes.add("png");
+		imageTypes.add("jpg");
+		imageTypes.add("jpge");
 	}
 }

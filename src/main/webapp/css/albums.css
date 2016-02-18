@@ -381,23 +381,76 @@ html, body {
       *zoom: 1;
       vertical-align: middle;
       max-width: 540px; }
-  .setting input[type="text"] {
-    width: 400px;
+  .setting .msg {
+    padding: 10px 0 10px 15px;
+    background-color: #fcf8e3;
+    color: #8a6d3b; }
+  .setting input[type="text"], .setting input[type="password"] {
+    width: 500px;
     border-radius: 3px;
     padding: 5px;
     font-size: 14px;
     border: 1px solid #ccc; }
   .setting textarea {
-    width: 400px;
+    width: 500px;
     height: 100px;
+    resize: none;
     border-radius: 3px;
+    border: 1px solid #ccc;
     padding: 5px;
-    font-size: 14px;
+    font-size: 14px; }
+  .setting input[type="file"] {
+    display: none; }
+  .setting .file-upload {
+    max-width: 510px;
+    overflow: hidden;
+    cursor: pointer;
     border: 1px solid #ccc; }
+    .setting .file-upload .file-upload-cover {
+      width: 510px;
+      height: 80px;
+      line-height: 80px;
+      text-align: center;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      user-select: none;
+      color: #ccc; }
+      .setting .file-upload .file-upload-cover .fa {
+        font-size: 24px; }
+    .setting .file-upload .image-view {
+      font-size: 0;
+      _line-height: 0;
+      text-align: center;
+      overflow: hidden; }
+      .setting .file-upload .image-view:before, .setting .file-upload .image-view .iecp {
+        display: inline-block;
+        *display: inline;
+        *zoom: 1;
+        vertical-align: middle; }
+      .setting .file-upload .image-view:before, .setting .file-upload .image-view .iecp {
+        content: "";
+        height: 100%;
+        font-size: 0;
+        line-height: 0;
+        width: 0; }
+      .setting .file-upload .image-view img {
+        max-width: 100%;
+        max-height: 100%; }
+      .setting .file-upload .image-view img {
+        display: inline-block;
+        *display: inline;
+        *zoom: 1;
+        vertical-align: middle;
+        font-size: 12px;
+        font-size: 1rem;
+        line-height: normal; }
   .setting .fa-toggle-off, .setting .fa-toggle-on {
     font-size: 24px;
     color: #878787;
-    cursor: pointer; }
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none; }
   .setting .fa-toggle-on {
     color: #3f79ff; }
 
@@ -459,6 +512,26 @@ body {
   background-color: #fff;
   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.15);
   border-radius: 3px; }
+  .content .content-nav {
+    *zoom: 1;
+    width: 100%;
+    height: 48px;
+    line-height: 48px;
+    border-bottom: 1px solid #ccc;
+    color: #778087; }
+    .content .content-nav:before, .content .content-nav:after {
+      content: "";
+      display: table; }
+    .content .content-nav:after {
+      clear: both;
+      overflow: hidden; }
+    .content .content-nav .content-title {
+      float: left;
+      padding-left: 15px;
+      font-size: 16px; }
+    .content .content-nav .content-options {
+      float: right;
+      margin-right: 15px; }
 
 .sides {
   float: right;
