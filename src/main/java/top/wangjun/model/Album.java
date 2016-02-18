@@ -13,6 +13,8 @@ public class Album implements Serializable {
 
     private String name;
 
+    private String cover;
+
     private String memo;
 
     private Byte status;
@@ -65,6 +67,20 @@ public class Album implements Serializable {
      */
     public void setName(String name) {
         this.name = name;
+    }
+
+    /**
+     * @return cover
+     */
+    public String getCover() {
+        return cover;
+    }
+
+    /**
+     * @param cover
+     */
+    public void setCover(String cover) {
+        this.cover = cover;
     }
 
     /**
