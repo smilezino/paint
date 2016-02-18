@@ -36,7 +36,7 @@ public class PhotoController {
 	@Resource
 	private ImageProcessor imageProcessor;
 
-	@RequestMapping("/item/${id}")
+	@RequestMapping("/item/{id}")
 	public String item(@PathVariable("id") Integer id, ModelMap modelMap) {
 		Photo photo = photoService.findById(id);
 		if(photo == null) {

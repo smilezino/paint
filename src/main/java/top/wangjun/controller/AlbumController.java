@@ -44,7 +44,7 @@ public class AlbumController {
 		return "album/index";
 	}
 
-	@RequestMapping("/album/${id}")
+	@RequestMapping("/album/{id}")
 	public String album(@PathVariable("id") Integer id,
 						@RequestParam(value = "p", defaultValue = "1") Integer p,
 						@RequestParam(value = "ps", defaultValue = "10") Integer ps,

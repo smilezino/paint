@@ -5,53 +5,51 @@
 <link rel="stylesheet" href="/css/select/select2.min.css">
 <script src="/css/select/select2.min.js"></script>
 
-<div class="content">
-	<div class="content-nav">
-		<div class="content-title">
-			<i class="fa fa-folder"></i> 添加图册集
-		</div>
+<div class="content-nav">
+	<div class="content-title">
+		<i class="fa fa-folder"></i> 添加图册集
 	</div>
-	<div class="setting">
-		<form id="album" action="/album/add" method="post">
-			#if($error)
-				<div class="msg">
-					<i class="fa fa-warning"></i>
-					<span>$!{error}</span>
-				</div>
-			#end
-
-			#if($album)
-				<div class="msg">
-					<i class="fa fa-info-circle"></i>
-					<span>添加成功!</span>
-				</div>
-			#end
-
-
-			<div class="set-item">
-				<span class="label">图册集名称</span>
-				<div class="input-item">
-					<input type="text" name="name" #if($album && $album.name)value="$album.name"#end/>
-				</div>
-			</div>
-			<div class="set-item">
-				<span class="label">描述</span>
-				<div class="input-item">
-					<textarea name="memo">#if($album && $album.memo)$album.memo#end</textarea>
-				</div>
-			</div>
-
-
-			<div class="set-item">
-				<span class="label"></span>
-				<div class="input-item">
-					<a href="javascript:;" class="btn submit">确定</a>
-				</div>
-			</div>
-		</form>
-	</div>
-
 </div>
+<div class="setting">
+	<form id="album" action="/album/add" method="post">
+		#if($error)
+			<div class="msg">
+				<i class="fa fa-warning"></i>
+				<span>$!{error}</span>
+			</div>
+		#end
+
+		#if($album)
+			<div class="msg">
+				<i class="fa fa-info-circle"></i>
+				<span>添加成功!</span>
+			</div>
+		#end
+
+
+		<div class="set-item">
+			<span class="label">图册集名称</span>
+			<div class="input-item">
+				<input type="text" name="name" #if($album && $album.name)value="$album.name"#end/>
+			</div>
+		</div>
+		<div class="set-item">
+			<span class="label">描述</span>
+			<div class="input-item">
+				<textarea name="memo">#if($album && $album.memo)$album.memo#end</textarea>
+			</div>
+		</div>
+
+
+		<div class="set-item">
+			<span class="label"></span>
+			<div class="input-item">
+				<a href="javascript:;" class="btn submit">确定</a>
+			</div>
+		</div>
+	</form>
+</div>
+
 
 <script>
 	$('.submit').click(function(){

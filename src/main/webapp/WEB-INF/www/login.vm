@@ -5,46 +5,44 @@
 <link rel="stylesheet" href="/css/select/select2.min.css">
 <script src="/css/select/select2.min.js"></script>
 
-<div class="content">
-	<div class="content-nav">
-		<div class="content-title">
-			<i class="fa fa-user"></i> 登陆
-		</div>
+<div class="content-nav">
+	<div class="content-title">
+		<i class="fa fa-user"></i> 登陆
 	</div>
-	<div class="setting">
-		<form id="login" action="/login" method="post">
-		#if($error)
-			<div class="msg">
-				<i class="fa fa-warning"></i>
-				<span>$!{error}</span>
-			</div>
-		#end
-
-
-		<div class="set-item">
-			<span class="label">用户名或邮箱</span>
-			<div class="input-item">
-				<input type="text" name="identity" #if($identity)value="$identity"#end/>
-			</div>
-		</div>
-		<div class="set-item">
-			<span class="label">密码</span>
-			<div class="input-item">
-				<input type="password" name="password"/>
-			</div>
-		</div>
-
-
-		<div class="set-item">
-			<span class="label"></span>
-			<div class="input-item">
-				<a href="javascript:;" class="btn submit">登陆</a>
-			</div>
-		</div>
-		</form>
-	</div>
-
 </div>
+<div class="setting">
+	<form id="login" action="/login" method="post">
+	#if($error)
+		<div class="msg">
+			<i class="fa fa-warning"></i>
+			<span>$!{error}</span>
+		</div>
+	#end
+
+
+	<div class="set-item">
+		<span class="label">用户名或邮箱</span>
+		<div class="input-item">
+			<input type="text" name="identity" #if($identity)value="$identity"#end/>
+		</div>
+	</div>
+	<div class="set-item">
+		<span class="label">密码</span>
+		<div class="input-item">
+			<input type="password" name="password"/>
+		</div>
+	</div>
+
+
+	<div class="set-item">
+		<span class="label"></span>
+		<div class="input-item">
+			<a href="javascript:;" class="btn submit">登陆</a>
+		</div>
+	</div>
+	</form>
+</div>
+
 
 <script>
 	$('.submit').click(function(){

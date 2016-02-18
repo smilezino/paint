@@ -38,6 +38,13 @@ public class PhotoServiceImpl implements IPhotoService {
 	}
 
 	@Override
+	public int countByUserId(Integer userId) {
+		Photo record = new Photo();
+		record.setUser(userId);
+		return mapper.selectCount(record);
+	}
+
+	@Override
 	public List<Photo> findByUser(Integer userId) {
 		Photo record = new Photo();
 		record.setUser(userId);

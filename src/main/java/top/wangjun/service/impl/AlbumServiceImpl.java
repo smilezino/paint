@@ -37,6 +37,13 @@ public class AlbumServiceImpl implements IAlbumService {
 	}
 
 	@Override
+	public int countByUserId(Integer userId) {
+		Album record = new Album();
+		record.setUser(userId);
+		return mapper.selectCount(record);
+	}
+
+	@Override
 	public List<Album> queryByUserId(Integer userId) {
 		Album record = new Album();
 		record.setUser(userId);

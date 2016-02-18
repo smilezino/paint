@@ -13,6 +13,7 @@ import java.util.List;
  */
 public interface IPhotoService {
 	public Photo findById(Integer id);
+	public int countByUserId(Integer userId);
 	public List<Photo> findByUser(Integer userId);
 	public Page<Photo> findPageByUser(Integer userId, Integer p, Integer ps);
 	public List<Photo> findByAlbum(Integer albumId);

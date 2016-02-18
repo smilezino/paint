@@ -12,6 +12,7 @@ import java.util.List;
 public interface IAlbumService {
 	public Album findById(Integer id);
 	public int add(Album album);
+	public int countByUserId(Integer userId);
 	public List<Album> queryByUserId(Integer userId);
 	public Page<Album> queryPageByUserId(Integer userId, Integer p, Integer ps);
 }

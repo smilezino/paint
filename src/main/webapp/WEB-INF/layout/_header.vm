@@ -1,10 +1,10 @@
 <div class="header">
 	<div class="wp cf">
 		<div class="header-left">
-			<a href="/wangjun/index" class="logo">WANGJUN</a>
+			<a href="/" class="logo">WANGJUN</a>
 			<ul class="header-nav">
 				<li>
-					<a href="/wangjun/albums">Album</a>
+					<a href="/album">Album</a>
 				</li>
 			</ul>
 		</div>

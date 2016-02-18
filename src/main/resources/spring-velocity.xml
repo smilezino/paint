@@ -29,7 +29,7 @@
 			<map>
 				<entry key="stringUtils"><bean class="org.apache.commons.lang3.StringUtils"/></entry>
 				<entry key="pageUtils"><bean class="top.wangjun.utils.PageUtils"/></entry>
-				<entry key="htmlUtils"><bean class="top.wangjun.utils.FormatUtils"/></entry>
+				<entry key="formatUtils"><bean class="top.wangjun.utils.FormatUtils"/></entry>
 			</map>
 		</property>
 		<property name="order" value="0"/>

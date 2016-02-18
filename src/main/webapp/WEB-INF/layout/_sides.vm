@@ -1,17 +1,17 @@
 <div class="sides">
 	<div class="side info">
 		<div class="avator">
-			<img src="http://placehold.it/60x60"/>
-			<span class="name">名字name</span>
+			<img src="$!user.avator"/>
+			<span class="name">$formatUtils.html($user.nickname)</span>
 		</div>
-		<div class="intro cell">这是一段介绍, 这是一段介绍...</div>
+		<div class="intro cell">$formatUtils.html($user.intro)</div>
 		<div class="creation cell">
-			<a href="#">
-				<span class="number">34</span>
+			<a href="/">
+				<span class="number">$photoCount</span>
 				<span class="info">所有作品</span>
 			</a>
-			<a href="#">
-				<span class="number">7</span>
+			<a href="/album">
+				<span class="number">$albumCount</span>
 				<span class="info">图册集</span>
 			</a>
 		</div>
@@ -22,16 +22,15 @@
 
 		</div>
 		<div class="setting cell">
-			<a href="#"><i class="fa fa-cog"></i> 设置</a>
+			<a href="/setting"><i class="fa fa-cog"></i> 设置</a>
 		</div>
 	</div>
 	<div class="side latest cf">
 		<p>最新作品</p>
 		<div class="images">
-			<a href="#"><img src="http://placehold.it/140x110/fff/a61"/></a>
-			<a href="#"><img src="http://placehold.it/140x110/fff/1ae"/></a>
-			<a href="#"><img src="http://placehold.it/140x110/a1a/1a1"/></a>
-			<a href="#"><img src="http://placehold.it/140x110/1a7/7a1"/></a>
+			#foreach($photo in $lastPhotos)
+				<a href="/item/$!{photo.id}"><img src="$!photo.thumb"/></a>
+			#end
 		</div>
 	</div>
 </div>

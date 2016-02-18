@@ -4,107 +4,105 @@
 <link rel="stylesheet" href="/css/select/select2.min.css">
 <script src="/css/select/select2.min.js"></script>
 
-<div class="content">
-	<div class="content-nav">
-		<div class="content-title">
-			<i class="fa fa-upload"></i> 上传作品
-		</div>
-		<div class="content-options album">
-			<a class="btn" href="/album/add">添加图集</a>
-		</div>
+<div class="content-nav">
+	<div class="content-title">
+		<i class="fa fa-upload"></i> 上传作品
 	</div>
-	<div class="setting">
-	<form id="upload" action="/upload" method="post" enctype="multipart/form-data">
-		#if($error)
-			<div class="msg">
-				<i class="fa fa-warning"></i>
-				<span>$error</span>
-			</div>
-		#end
+	<div class="content-options album">
+		<a class="btn" href="/album/add">添加图集</a>
+	</div>
+</div>
+<div class="setting">
+<form id="upload" action="/upload" method="post" enctype="multipart/form-data">
+	#if($error)
+		<div class="msg">
+			<i class="fa fa-warning"></i>
+			<span>$error</span>
+		</div>
+	#end
 
-		#if($photoId)
-			<div class="msg">
-				<i class="fa fa-info-circle"></i>
-				<span>上传成功!</span>
-				<a href="/item/$photoId">查看</a>
-			</div>
-		#end
+	#if($photoId)
+		<div class="msg">
+			<i class="fa fa-info-circle"></i>
+			<span>上传成功!</span>
+			<a href="/item/$photoId">查看</a>
+		</div>
+	#end
 
 
-		<div class="set-item">
-			<span class="label">选择文件</span>
-			<div class="input-item">
-				<div class="file-upload">
-					<input id="file-image" type="file" name="file" accept="image/jpeg, image/png, image/jpg"/>
-					<div class="file-upload-cover">
-						<i class="fa fa-cloud-upload"></i>
-						<span class="tip">可拖文件到此</span>
-					</div>
-					<div class="image-view">
+	<div class="set-item">
+		<span class="label">选择文件</span>
+		<div class="input-item">
+			<div class="file-upload">
+				<input id="file-image" type="file" name="file" accept="image/jpeg, image/png, image/jpg"/>
+				<div class="file-upload-cover">
+					<i class="fa fa-cloud-upload"></i>
+					<span class="tip">可拖文件到此</span>
+				</div>
+				<div class="image-view">
 
-					</div>
 				</div>
 			</div>
 		</div>
-
-		<div class="set-item">
-			<span class="label">标题</span>
-			<div class="input-item">
-				<input type="text" name="title"/>
-			</div>
-		</div>
-
-		<div class="set-item">
-			<span class="label">图册集</span>
-			<div class="input-item">
-				<select name="album">
-					<option value="0">无</option>
-					#foreach($album in $albums)
-						<option value="$album.id">$album.name</option>
-					#end
-				</select>
-			</div>
-		</div>
-
-		<div class="set-item">
-			<span class="label">水印</span>
-			<div class="input-item">
-				<select name="watermark">
-					<option value="0">无</option>
-					<option value="1">右下</option>
-					<option value="2">右上</option>
-					<option value="3">左下</option>
-					<option value="4">左上</option>
-					<option value="5">居中</option>
-				</select>
-			</div>
-		</div>
-
-		<div class="set-item">
-			<span class="label">开放下载</span>
-			<div class="input-item">
-				<input type="hidden" name="status" value="0">
-				<i class="fa fa-toggle-off js-toggle"></i>
-			</div>
-		</div>
-
-		<div class="set-item">
-			<span class="label">描述</span>
-			<div class="input-item">
-				<textarea name="note"></textarea>
-			</div>
-		</div>
-
-		<div class="set-item">
-			<span class="label"></span>
-			<div class="input-item">
-				<a href="javascript:;" class="btn submit">确定</a>
-			</div>
-		</div>
-	</form>
 	</div>
 
+	<div class="set-item">
+		<span class="label">标题</span>
+		<div class="input-item">
+			<input type="text" name="title"/>
+		</div>
+	</div>
+
+	<div class="set-item">
+		<span class="label">图册集</span>
+		<div class="input-item">
+			<select name="album">
+				<option value="0">无</option>
+				#foreach($album in $albums)
+					<option value="$album.id">$album.name</option>
+				#end
+			</select>
+		</div>
+	</div>
+
+	<div class="set-item">
+		<span class="label">水印</span>
+		<div class="input-item">
+			<select name="watermark">
+				<option value="0">无</option>
+				<option value="1">右下</option>
+				<option value="2">右上</option>
+				<option value="3">左下</option>
+				<option value="4">左上</option>
+				<option value="5">居中</option>
+			</select>
+		</div>
+	</div>
+
+	<div class="set-item">
+		<span class="label">开放下载</span>
+		<div class="input-item">
+			<input type="hidden" name="status" value="0">
+			<i class="fa fa-toggle-off js-toggle"></i>
+		</div>
+	</div>
+
+	<div class="set-item">
+		<span class="label">描述</span>
+		<div class="input-item">
+			<textarea name="note"></textarea>
+		</div>
+	</div>
+
+	<div class="set-item">
+		<span class="label"></span>
+		<div class="input-item">
+			<a href="javascript:;" class="btn submit">确定</a>
+		</div>
+	</div>
+</form>
 </div>
+
 
 <script src="/js/upload.js"></script>
 <script>

@@ -2,52 +2,50 @@
 
 <link rel="stylesheet" href="/css/image.css" />
 
-<div class="content">
-	<div class="content-nav">
-		<div class="content-title">
-			<i class="fa fa-image"></i> $formatUtils.html(${photo.title})
-		</div>
-		<div class="content-options share">
-			<li class="dropdown">
-				<a href="javascript:;"><i class="fa fa-share-alt"></i> 分享</a>
-				<div class="dropdown-menu-content js-menu-content">
-					<ul class="dropdown-menu dropdown-menu-sw">
-						<a class="dropdown-item" href="#">
-							<i class="fa fa-weibo"></i> 微博
-						</a>
-						<a class="dropdown-item" href="#">
-							<i class="fa fa-weixin"></i> 朋友圈
-						</a>
-						<a class="dropdown-item" href="#">
-							<i class="fa fa-weixin"></i> 朋友圈
-						</a>
-						<a class="dropdown-item" href="#">
-							<i class="fa fa-weixin"></i> 朋友圈
-						</a>
-					</ul>
-				</div>
+<div class="content-nav">
+	<div class="content-title">
+		<i class="fa fa-image"></i> $formatUtils.html(${photo.title})
+	</div>
+	<div class="content-options share">
+		<li class="dropdown">
+			<a href="javascript:;"><i class="fa fa-share-alt"></i> 分享</a>
+			<div class="dropdown-menu-content js-menu-content">
+				<ul class="dropdown-menu dropdown-menu-sw">
+					<a class="dropdown-item" href="#">
+						<i class="fa fa-weibo"></i> 微博
+					</a>
+					<a class="dropdown-item" href="#">
+						<i class="fa fa-weixin"></i> 朋友圈
+					</a>
+					<a class="dropdown-item" href="#">
+						<i class="fa fa-weixin"></i> 朋友圈
+					</a>
+					<a class="dropdown-item" href="#">
+						<i class="fa fa-weixin"></i> 朋友圈
+					</a>
+				</ul>
+			</div>
+		</li>
+		#if($login || $photo.status==1)
+			<li>
+				<a href="/download?item=$photo.id"><i class="fa fa-download"></i> 下载原图</a>
 			</li>
-			#if($login || $photo.status==1)
-				<li>
-					<a href="/download?item=$photo.id"><i class="fa fa-download"></i> 下载原图</a>
-				</li>
-			#end
+		#end
 
 
-		</div>
 	</div>
-	<div class="image" style="height: $!{photo.height}">
-		<img src="$photo.filepath"/>
-	</div>
-	<div class="intro">$!{photo.intro}</div>
-	<div class="info">
-		<a class="album" href="/album/$photo.album">
-			<i class="fa fa-folder-open"></i> $formatUtils.html(${album.name})
-		</a>
-		<div class="info-eta">
-			<i class="fa fa-eye"></i> $photo.viewCount
-			<span> · </span>
-			<i class="fa fa-download"></i> $photo.downloadCount
-		</div>
+</div>
+<div class="image" style="height: $!{photo.height}">
+	<img src="$photo.filepath"/>
+</div>
+<div class="intro">$!{photo.intro}</div>
+<div class="info">
+	<a class="album" href="/album/$photo.album">
+		<i class="fa fa-folder-open"></i> $formatUtils.html(${album.name})
+	</a>
+	<div class="info-eta">
+		<i class="fa fa-eye"></i> $photo.viewCount
+		<span> · </span>
+		<i class="fa fa-download"></i> $photo.downloadCount
 	</div>
 </div>

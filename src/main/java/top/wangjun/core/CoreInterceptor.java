@@ -5,6 +5,8 @@ import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 import top.wangjun.model.User;
+import top.wangjun.service.IAlbumService;
+import top.wangjun.service.IPhotoService;
 import top.wangjun.service.IUserService;
 import top.wangjun.utils.CookieUtils;
 import top.wangjun.utils.UserUtils;
@@ -18,6 +20,12 @@ public class CoreInterceptor extends HandlerInterceptorAdapter {
 
 	@Resource
 	private IUserService userService;
+
+	@Resource
+	private IAlbumService albumService;
+
+	@Resource
+	private IPhotoService photoService;
 
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
@@ -42,11 +50,16 @@ public class CoreInterceptor extends HandlerInterceptorAdapter {
 		if(modelAndView == null) return;
 
 		if(!modelAndView.getViewName().contains("redirect")) {
-			modelAndView.addObject("user", userService.admin());
+
+			User admin = userService.admin();
+			modelAndView.addObject("user", admin);
 			modelAndView.addObject("login", this.getUser(request) != null);
 			modelAndView.addObject("today", new Date());
 			modelAndView.addObject("currentUrl", request.getRequestURL().toString());
 			modelAndView.addObject("queryString", request.getQueryString());
+			modelAndView.addObject("albumCount", albumService.countByUserId(admin.getId()));
+			modelAndView.addObject("photoCount", photoService.countByUserId(admin.getId()));
+			modelAndView.addObject("lastPhotos", photoService.findPageByUser(admin.getId(), 1, 4));
 		}
 		super.postHandle(request, response, handler, modelAndView);
 	}

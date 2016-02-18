@@ -39,7 +39,7 @@ public class ImageProcessor implements InitializingBean {
 
 	private List<String> imageTypes;
 
-	@Value("#{servletContext.getRealPath('/WEB-INF')}")
+	@Value("#{servletContext.getRealPath('')}")
 	private String servletContextPath;
 
 	@Resource

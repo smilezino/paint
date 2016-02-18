@@ -14,7 +14,7 @@
 	#set($prePage = $data.pageNum - 1)
 	#set($nextPage = $data.pageNum + 1)
 
-	#if($data.pageSize > 1)
+	#if($data.pages > 1)
 
 	<div class="page">
 		#if($data.pageNum > 1)
@@ -23,9 +23,9 @@
 			</a>
 		#end
 
-		<span class="info">$data.pageNum/$data.pageSize · 共 ${data.total} 个</span>
+		<span class="info">$data.pageNum/$data.pages · 共 ${data.total} 个</span>
 
-		#if($data.pageNum < $data.pageSize)
+		#if($data.pageNum < $data.pages)
 			<a class="btn next" href="$pageUtils.url($url, $key, $nextPage)">
 				<i class="fa fa-angle-right"></i>
 			</a>
