@@ -1,0 +1,36 @@
+## velocity 宏
+#macro(pager $data)
+	#pagerKey($data, "p")
+#end
+
+
+#macro(pagerKey $data $key)
+	#if($queryString)
+		#set($url = $currentUrl + "?" + $queryString)
+	#else
+		#set($url = $currentUrl)
+	#end
+
+	#set($prePage = $data.pageNum - 1)
+	#set($nextPage = $data.pageNum + 1)
+
+	#if($data.pageSize > 1)
+
+	<div class="page">
+		#if($data.pageNum > 1)
+			<a class="btn prev" href="$pageUtils.url($url, $key, $prePage)">
+				<i class="fa fa-angle-left"></i>
+			</a>
+		#end
+
+		<span class="info">$data.pageNum/$data.pageSize · 共 ${data.total} 个</span>
+
+		#if($data.pageNum < $data.pageSize)
+			<a class="btn next" href="$pageUtils.url($url, $key, $nextPage)">
+				<i class="fa fa-angle-right"></i>
+			</a>
+		#end
+
+	</div>
+	#end
+#end

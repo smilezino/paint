@@ -19,16 +19,6 @@ public class CommonController {
 		return "index";
 	}
 
-	@RequestMapping("/album")
-	public String album() {
-		return "album";
-	}
-
-	@RequestMapping("/item")
-	public String item() {
-		return "item";
-	}
-
 	@RequestMapping("/404")
 	public String error404() {
 		return "404";

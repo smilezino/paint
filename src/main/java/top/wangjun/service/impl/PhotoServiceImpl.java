@@ -1,5 +1,7 @@
 package top.wangjun.service.impl;
 
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.io.FilenameUtils;
 import org.springframework.stereotype.Service;
@@ -14,6 +16,7 @@ import javax.annotation.Resource;
 import java.io.File;
 import java.io.IOException;
 import java.util.Date;
+import java.util.List;
 
 /**
  * @author zino
@@ -27,6 +30,25 @@ public class PhotoServiceImpl implements IPhotoService {
 
 	@Resource
 	private PhotoMapper mapper;
+
+	@Override
+	public Photo findById(Integer id) {
+		return mapper.selectByPrimaryKey(id);
+	}
+
+	@Override
+	public List<Photo> findByAlbum(Integer albumId) {
+		Photo record = new Photo();
+		record.setAlbum(albumId);
+		return mapper.select(record);
+	}
+
+	@Override
+	public Page<Photo> findPageByAlbum(Integer albumId, Integer p, Integer ps) {
+		PageHelper.startPage(p, ps, "id desc");
+		List<Photo> list = this.findByAlbum(albumId);
+		return (Page<Photo>) list;
+	}
 
 	@Override
 	public Photo upload(Photo photo, int watermark, MultipartFile file) throws IOException {

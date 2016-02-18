@@ -1,0 +1,17 @@
+#set($layout = "layout/_index.vm")
+
+<link rel="stylesheet" href="/css/albums.css" />
+
+<div class="content">
+	<div class="albums">
+		#foreach($album in $albums)
+			<div class="album">
+				<a class="cover" href="/album/$album.id">
+					<img src="$album.cover"/>
+				</a>
+				<a class="title" href="//album/$album.id">$formatUtils.html($album.name)</a>
+			</div>
+		#end
+	</div>
+	#pager($albums)
+</div>

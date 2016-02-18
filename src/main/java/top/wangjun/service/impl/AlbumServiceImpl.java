@@ -1,5 +1,7 @@
 package top.wangjun.service.impl;
 
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
 import org.springframework.stereotype.Service;
 import top.wangjun.dao.AlbumMapper;
 import top.wangjun.enums.Status;
@@ -22,6 +24,11 @@ public class AlbumServiceImpl implements IAlbumService {
 	private AlbumMapper mapper;
 
 	@Override
+	public Album findById(Integer id) {
+		return mapper.selectByPrimaryKey(id);
+	}
+
+	@Override
 	public int add(Album album) {
 		album.setCreateTime(new Date());
 		album.setUpdateTime(new Date());
@@ -34,5 +41,12 @@ public class AlbumServiceImpl implements IAlbumService {
 		Album record = new Album();
 		record.setUser(userId);
 		return mapper.select(record);
+	}
+
+	@Override
+	public Page<Album> queryPageByUserId(Integer userId, Integer p, Integer ps) {
+		PageHelper.startPage(p, ps, "id desc");
+		List<Album> list = this.queryByUserId(userId);
+		return (Page<Album>) list;
 	}
 }

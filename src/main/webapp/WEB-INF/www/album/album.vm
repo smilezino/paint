@@ -1,0 +1,18 @@
+#set($layout = "layout/_index.vm")
+#set($page_title = "图册集 - $formatUtils.html($album.name)")
+
+<link rel="stylesheet" href="/css/index.css" />
+
+<div class="content">
+	<div class="content-nav">
+		<div class="content-title">
+			<i class="fa fa-folder-open"></i> $formatUtils.html($album.name)
+		</div>
+	</div>
+	<div class="pictures">
+		#foreach($photo in $photos)
+			<a class="pic" href="/item/${photo.id}"><img src="$photo.thumb"/></a>
+		#end
+	</div>
+	#pager($photos)
+</div>
