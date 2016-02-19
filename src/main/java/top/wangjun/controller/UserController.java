@@ -9,28 +9,28 @@ import org.springframework.web.multipart.MultipartFile;
 import top.wangjun.core.AuthRequired;
 import top.wangjun.core.Constants;
 import top.wangjun.core.CurrentUser;
-import top.wangjun.image.ImageProcessor;
-import top.wangjun.model.Album;
-import top.wangjun.model.Photo;
+import top.wangjun.image.ImageTool;
 import top.wangjun.model.User;
-import top.wangjun.service.IAlbumService;
-import top.wangjun.service.IPhotoService;
+import top.wangjun.service.IProfileService;
 import top.wangjun.service.IUserService;
 import top.wangjun.utils.CookieUtils;
 import top.wangjun.utils.UserUtils;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.File;
 import java.io.IOException;
-import java.util.List;
 
 @Controller
 public class UserController {
 
 	@Resource
 	private IUserService userService;
+
+	@Resource
+	private IProfileService profileService;
+
+	@Resource
+	private ImageTool imageTool;
 
 	@RequestMapping(value = "login", method = RequestMethod.GET)
 	public String login() {
@@ -51,6 +51,67 @@ public class UserController {
 			modelMap.put("identity", identity);
 			return "login";
 		}
+	}
 
+	@AuthRequired
+	@RequestMapping(value = "setting", method = RequestMethod.GET)
+	public String setting(@CurrentUser User user, ModelMap modelMap) {
+		modelMap.put("userinfo", user);
+
+		boolean autoGenerateCover = profileService.autoGenerateCover(user.getId());
+		String watermarkText = profileService.watermarkText(user.getId());
+
+		modelMap.put("autoGenerateCover", autoGenerateCover);
+		modelMap.put("watermarkText", watermarkText);
+		return "setting/index";
+	}
+
+	@AuthRequired
+	@RequestMapping(value = "setting", method = RequestMethod.POST, params = "type=user")
+	public String settingUserInfo(@CurrentUser User user, User userinfo, MultipartFile file, ModelMap modelMap) throws IOException {
+
+		if(userinfo == null) {
+			userinfo = new User();
+		}
+
+		userinfo.setId(user.getId());
+
+		if(!file.isEmpty() && imageTool.isValid(file.getOriginalFilename())) {
+			String avator = imageTool.saveAvator(file, user.getId());
+			userinfo.setAvator(avator);
+		}
+
+		userService.update(userinfo);
+
+		boolean autoGenerateCover = profileService.autoGenerateCover(user.getId());
+		String watermarkText = profileService.watermarkText(user.getId());
+
+		modelMap.put("autoGenerateCover", autoGenerateCover);
+		modelMap.put("watermarkText", watermarkText);
+
+		modelMap.put("success", "更新成功");
+		modelMap.put("userinfo", userinfo);
+
+		modelMap.put("type", "user");
+		return "setting/index";
+	}
+
+	@AuthRequired
+	@RequestMapping(value = "setting", method = RequestMethod.POST, params = "type=sys")
+	public String settingSys(@CurrentUser User user, Boolean autoGenerateCover, String watermarkText, ModelMap modelMap) {
+		modelMap.put("userinfo", user);
+		modelMap.put("type", "sys");
+
+		String autoGenerateCoverText = autoGenerateCover ? "true" : "false";
+
+		profileService.update(user.getId(), Constants.SETTING_AUTO_GENERATE_COVER, autoGenerateCoverText);
+		profileService.update(user.getId(), Constants.SETTING_WATERMARK_TEXT, watermarkText);
+
+
+		modelMap.put("autoGenerateCover", autoGenerateCover);
+		modelMap.put("watermarkText", watermarkText);
+
+		modelMap.put("success", "更新成功");
+		return "setting/index";
 	}
 }

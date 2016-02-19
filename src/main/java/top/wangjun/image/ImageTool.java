@@ -21,7 +21,7 @@ import java.util.List;
  * 图片处理工具类
  */
 @Component
-public class ImageProcessor implements InitializingBean {
+public class ImageTool implements InitializingBean {
 
 	public static final String DATE_FORMAT = "yyyy";
 
@@ -29,11 +29,14 @@ public class ImageProcessor implements InitializingBean {
 	public static final String PREFIX_NORMAL = "uploads";
 	public static final String PREFIX_THUMB = "uploads/thumb";
 	public static final String PREFIX_COVER = "uploads/cover";
+	public static final String PREFIX_AVATOR = "uploads/avator";
 
 	public static final int NORMAL_IMAGE_WIDTH = 680;
 	public static final int THUMB_IMAGE_WIDTH = 340;
 	public static final int THUMB_IMAGE_HEIGHT = 272;
 	public static final double IMAGE_WIDTH_HEIGHT_SCALE = 1.25;
+
+	public static final int AVATOR_SIZE = 100;
 
 	private List<String> imageTypes;
 
@@ -125,6 +128,23 @@ public class ImageProcessor implements InitializingBean {
 		}
 
 		image.write(servletContextPath + filename);
+		return filename;
+	}
+
+	public String saveAvator(MultipartFile file, Integer userId) throws IOException {
+		String filename = this.getFilePath(PREFIX_AVATOR, userId + "." + FilenameUtils.getExtension(file.getOriginalFilename()));
+		String tmpname = this.getFilePath(PREFIX_AVATOR, userId + "_tmp." + FilenameUtils.getExtension(file.getOriginalFilename()));
+		File tmp = new File(servletContextPath + tmpname);
+		if(!tmp.getParentFile().exists()) {
+			tmp.getParentFile().mkdirs();
+		}
+		IOUtils.copy(file.getInputStream(), new FileOutputStream(tmp));
+
+		Image image = new Image(tmp);
+		image.resize(AVATOR_SIZE, AVATOR_SIZE).write(servletContextPath + filename);
+
+		tmp.delete();
+
 		return filename;
 	}
 

@@ -14,4 +14,5 @@ public interface IUserService {
 	public User admin();
 	public User getBetween(Integer id, String username, String email);
 	public List<User> getListBetween(Integer id, String username, String email);
+	public int update(User user);
 }

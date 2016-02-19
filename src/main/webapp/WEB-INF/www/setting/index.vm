@@ -1,0 +1,170 @@
+#set($layout = "layout/_index.vm")
+#set($page_title = "设置")
+
+<link rel="stylesheet" href="/css/upload.css" />
+<link rel="stylesheet" href="/css/select/select2.min.css">
+<script src="/css/select/select2.min.js"></script>
+
+<div class="content">
+	<div class="content-nav">
+		<div class="content-title">
+			<i class="fa fa-user"></i> 用户信息设置
+		</div>
+	</div>
+	<div class="setting">
+		#if($type == "user" && $error)
+			<div class="msg">
+				<i class="fa fa-warning"></i>
+				<span>$error</span>
+			</div>
+		#end
+
+		#if($type == "user" && $success)
+			<div class="msg">
+				<i class="fa fa-info-circle"></i>
+				<span>$success!</span>
+			</div>
+		#end
+	<form id="setting-user" action="/setting" method="post" enctype="multipart/form-data">
+		#if($error)
+			<div class="msg">
+				<i class="fa fa-warning"></i>
+				<span>$!{error}</span>
+			</div>
+		#end
+
+		<div class="set-item">
+			<span class="label">头像</span>
+			<div class="input-item">
+				<div class="file-upload">
+					<input id="file-image" type="file" name="file" accept="image/jpeg, image/png, image/jpg"/>
+					<div class="file-upload-cover">
+						<i class="fa fa-cloud-upload"></i>
+						<span class="tip">可拖文件到此</span>
+					</div>
+					<div class="image-view">
+
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+		<div class="set-item">
+			<span class="label">昵称</span>
+			<div class="input-item">
+				<input type="text" name="nickname" value="$!{userinfo.nickname}"/>
+			</div>
+		</div>
+
+		<div class="set-item">
+			<span class="label">QQ</span>
+			<div class="input-item">
+				<input type="text" name="qq" value="$!{userinfo.qq}"/>
+			</div>
+		</div>
+
+		<div class="set-item">
+			<span class="label">微信</span>
+			<div class="input-item">
+				<input type="text" name="weixin" value="$!{userinfo.weixin}"/>
+			</div>
+		</div>
+
+		<div class="set-item">
+			<span class="label">微博</span>
+			<div class="input-item">
+				<input type="text" name="weibo" value="$!{userinfo.weibo}"/>
+			</div>
+		</div>
+		<div class="set-item">
+			<span class="label">Bilibili</span>
+			<div class="input-item">
+				<input type="text" name="bilibili" value="$!{userinfo.bilibili}"/>
+			</div>
+		</div>
+
+		<div class="set-item">
+			<span class="label">自我介绍</span>
+			<div class="input-item">
+				<textarea name="intro">$!{userinfo.intro}</textarea>
+			</div>
+		</div>
+
+		<div class="set-item">
+			<span class="label"></span>
+			<div class="input-item">
+				<a href="javascript:;" class="btn submit">更新</a>
+			</div>
+		</div>
+		<input type="hidden" name="type" value="user" />
+		</form>
+	</div>
+	<script>
+		$('#setting-user .submit').click(function(){
+			settingUser();
+		});
+
+		function settingUser() {
+			$('#setting-user').submit();
+		}
+	</script>
+</div>
+
+<div class="content">
+	<div class="content-nav">
+		<div class="content-title">
+			<i class="fa fa-cog"></i> 系统设置
+		</div>
+	</div>
+	<div class="setting">
+		#if($type == "sys" && $error)
+			<div class="msg">
+				<i class="fa fa-warning"></i>
+				<span>$error</span>
+			</div>
+		#end
+
+		#if($type == "sys" && $success)
+			<div class="msg">
+				<i class="fa fa-info-circle"></i>
+				<span>$success!</span>
+			</div>
+		#end
+		<form id="setting-sys" action="/setting" method="post">
+			<div class="set-item">
+				<span class="label">自动生成封面</span>
+				<div class="input-item">
+					<input type="hidden" name="autoGenerateCover" value="#if($autoGenerateCover)1#else 0#end">
+					<i class="fa #if($autoGenerateCover)fa-toggle-on#else fa-toggle-off#end js-toggle"></i>
+				</div>
+			</div>
+
+			<div class="set-item">
+				<span class="label">水印文字</span>
+				<div class="input-item">
+					<input type="text" name="watermarkText" value="$!{watermarkText}"/>
+				</div>
+			</div>
+
+			<div class="set-item">
+				<span class="label"></span>
+				<div class="input-item">
+					<a href="javascript:;" class="btn submit">更新</a>
+				</div>
+			</div>
+			<input type="hidden" name="type" value="sys" />
+		</form>
+	</div>
+	<script>
+		$('#setting-sys .submit').click(function(){
+			settingSys();
+		});
+
+		function settingSys() {
+			$('#setting-sys').submit();
+		}
+	</script>
+</div>
+
+<script src="/js/upload.js"></script>

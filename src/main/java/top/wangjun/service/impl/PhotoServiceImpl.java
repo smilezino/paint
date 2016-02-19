@@ -8,10 +8,9 @@ import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
-import tk.mybatis.mapper.entity.Example;
 import top.wangjun.dao.PhotoMapper;
 import top.wangjun.image.Image;
-import top.wangjun.image.ImageProcessor;
+import top.wangjun.image.ImageTool;
 import top.wangjun.image.WatermarkPosition;
 import top.wangjun.model.Photo;
 import top.wangjun.service.IAlbumService;
@@ -32,7 +31,7 @@ import java.util.List;
 public class PhotoServiceImpl implements IPhotoService {
 
 	@Resource
-	private ImageProcessor imageProcessor;
+	private ImageTool imageTool;
 
 	@Resource
 	private PhotoMapper mapper;
@@ -94,20 +93,20 @@ public class PhotoServiceImpl implements IPhotoService {
 
 		String md5Name = DigestUtils.md5Hex(file.getBytes()) + "." + FilenameUtils.getExtension(file.getOriginalFilename());
 
-		String originPath = imageProcessor.getFilePath(ImageProcessor.PREFIX_ORIGIN, md5Name);
+		String originPath = imageTool.getFilePath(ImageTool.PREFIX_ORIGIN, md5Name);
 		photo.setOrigin(originPath);
 
-		String normalPath = imageProcessor.getFilePath(ImageProcessor.PREFIX_NORMAL, md5Name);
+		String normalPath = imageTool.getFilePath(ImageTool.PREFIX_NORMAL, md5Name);
 		photo.setFilepath(normalPath);
 
-		String thumbPath = imageProcessor.getFilePath(ImageProcessor.PREFIX_THUMB, md5Name);
+		String thumbPath = imageTool.getFilePath(ImageTool.PREFIX_THUMB, md5Name);
 		photo.setThumb(thumbPath);
 
-		File originFile = imageProcessor.saveOriginFile(file, originPath);
+		File originFile = imageTool.saveOriginFile(file, originPath);
 		Image image = new Image(originFile);
 
-		int width = image.getWidth() > ImageProcessor.NORMAL_IMAGE_WIDTH ? ImageProcessor.NORMAL_IMAGE_WIDTH : image.getWidth();
-		int height = imageProcessor.calculateNormalHeight(image.getWidth(), image.getHeight());
+		int width = image.getWidth() > ImageTool.NORMAL_IMAGE_WIDTH ? ImageTool.NORMAL_IMAGE_WIDTH : image.getWidth();
+		int height = imageTool.calculateNormalHeight(image.getWidth(), image.getHeight());
 
 		photo.setWidth(width);
 		photo.setHeight(height);
@@ -119,13 +118,13 @@ public class PhotoServiceImpl implements IPhotoService {
 			watermarkText = profileService.watermarkText(photo.getUser());
 		}
 		//TODO: 异步处理
-		imageProcessor.generateNormalImage(originFile, normalPath, position, watermarkText);
-		imageProcessor.generateThumbImage(originFile, thumbPath);
+		imageTool.generateNormalImage(originFile, normalPath, position, watermarkText);
+		imageTool.generateThumbImage(originFile, thumbPath);
 
 		//自动生成封面
 		if(profileService.autoGenerateCover(photo.getUser())) {
 			List<Photo> photos = this.findPageByAlbum(photo.getAlbum(), 1, 2);
-			String cover = imageProcessor.generateAlbumCover(thumbPath, photo.getAlbum(), photos);
+			String cover = imageTool.generateAlbumCover(thumbPath, photo.getAlbum(), photos);
 			albumService.updateCover(photo.getAlbum(), cover);
 		}
 

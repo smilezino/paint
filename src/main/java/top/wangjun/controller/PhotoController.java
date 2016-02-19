@@ -11,7 +11,7 @@ import org.springframework.web.multipart.MultipartFile;
 import top.wangjun.core.AuthRequired;
 import top.wangjun.core.CurrentUser;
 import top.wangjun.enums.Status;
-import top.wangjun.image.ImageProcessor;
+import top.wangjun.image.ImageTool;
 import top.wangjun.model.Album;
 import top.wangjun.model.Photo;
 import top.wangjun.model.User;
@@ -39,7 +39,7 @@ public class PhotoController {
 	private IAlbumService albumService;
 
 	@Resource
-	private ImageProcessor imageProcessor;
+	private ImageTool imageTool;
 
 	@RequestMapping("/item/{id}")
 	public String item(@PathVariable("id") Integer id, ModelMap modelMap) {
@@ -67,7 +67,7 @@ public class PhotoController {
 		}
 
 		String filename = file.getOriginalFilename();
-		if(!imageProcessor.isValid(filename)) {
+		if(!imageTool.isValid(filename)) {
 			modelMap.put("error", "文件格式不正确");
 			return "photo/upload";
 		}
@@ -97,7 +97,7 @@ public class PhotoController {
 
 		photoService.incrDownloadCount(id);
 
-		File file = imageProcessor.readImage(photo.getOrigin());
+		File file = imageTool.readImage(photo.getOrigin());
 
 		String mimeType= URLConnection.guessContentTypeFromName(file.getName());
 		if(mimeType == null){

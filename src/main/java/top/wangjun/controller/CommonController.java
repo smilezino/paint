@@ -1,24 +1,15 @@
 package top.wangjun.controller;
 
 import com.github.pagehelper.Page;
-import org.apache.commons.io.FilenameUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.*;
-import top.wangjun.core.CurrentUser;
-import top.wangjun.enums.Status;
-import top.wangjun.image.ImageProcessor;
 import top.wangjun.model.Photo;
 import top.wangjun.model.User;
 import top.wangjun.service.IPhotoService;
 import top.wangjun.service.IUserService;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpServletResponse;
-import java.io.*;
-import java.net.URLConnection;
-import java.net.URLEncoder;
 
 /**
  *

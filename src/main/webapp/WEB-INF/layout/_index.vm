@@ -10,9 +10,9 @@
 #parse("_header.vm")
 <div class="main wp cf">
 	#parse("_sides.vm")
-	<div class="content">
-		$screen_content
-	</div>
+
+	$screen_content
+
 </div>
 #parse("_footer.vm")
 </body>
