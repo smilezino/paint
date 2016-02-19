@@ -310,7 +310,7 @@ html, body {
   position: relative; }
 
 .dropdown-menu-content {
-  display: block; }
+  display: none; }
 
 .dropdown-menu {
   position: absolute;
@@ -579,9 +579,34 @@ body {
         background-color: #bababa;
         color: white; }
 .content .image {
+  font-size: 0;
+  _line-height: 0;
+  text-align: center;
+  overflow: hidden;
   border-bottom: 1px solid rgba(0, 0, 0, 0.1); }
+  .content .image:before, .content .image .iecp {
+    display: inline-block;
+    *display: inline;
+    *zoom: 1;
+    vertical-align: middle; }
+  .content .image:before, .content .image .iecp {
+    content: "";
+    height: 100%;
+    font-size: 0;
+    line-height: 0;
+    width: 0; }
   .content .image img {
-    display: block; }
+    max-width: 100%;
+    max-height: 100%; }
+  .content .image img {
+    display: block;
+    display: inline-block;
+    *display: inline;
+    *zoom: 1;
+    vertical-align: middle;
+    font-size: 12px;
+    font-size: 1rem;
+    line-height: normal; }
 .content .intro {
   margin: 15px 0;
   padding: 0 15px;

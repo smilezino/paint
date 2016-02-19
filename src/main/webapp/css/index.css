@@ -310,7 +310,7 @@ html, body {
   position: relative; }
 
 .dropdown-menu-content {
-  display: block; }
+  display: none; }
 
 .dropdown-menu {
   position: absolute;
@@ -576,10 +576,10 @@ body {
   .pictures .pic {
     float: left;
     width: 340px;
-    height: 270px; }
+    height: 272px; }
     .pictures .pic img {
       width: 340px;
-      height: 270px; }
+      height: 272px; }
   .pictures .pic:nth-child(odd) {
     width: 339px;
     overflow: hidden;

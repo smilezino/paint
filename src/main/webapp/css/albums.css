@@ -310,7 +310,7 @@ html, body {
   position: relative; }
 
 .dropdown-menu-content {
-  display: block; }
+  display: none; }
 
 .dropdown-menu {
   position: absolute;
