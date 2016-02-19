@@ -10,8 +10,10 @@ import tk.mybatis.mapper.entity.Example;
 import top.wangjun.dao.PhotoMapper;
 import top.wangjun.image.Image;
 import top.wangjun.image.ImageProcessor;
+import top.wangjun.image.WatermarkPosition;
 import top.wangjun.model.Photo;
 import top.wangjun.service.IPhotoService;
+import top.wangjun.service.IProfileService;
 
 import javax.annotation.Resource;
 import java.io.File;
@@ -31,6 +33,9 @@ public class PhotoServiceImpl implements IPhotoService {
 
 	@Resource
 	private PhotoMapper mapper;
+
+	@Resource
+	private IProfileService profileService;
 
 	@Override
 	public Photo findById(Integer id) {
@@ -95,8 +100,14 @@ public class PhotoServiceImpl implements IPhotoService {
 		photo.setWidth(width);
 		photo.setHeight(height);
 
+
+		WatermarkPosition position = WatermarkPosition.getPosition(watermark);
+		String watermarkText = null;
+		if(position!= null) {
+			watermarkText = profileService.watermarkText(photo.getUser());
+		}
 		//TODO: 异步处理
-		imageProcessor.generateNormalImage(originFile, normalPath, watermark);
+		imageProcessor.generateNormalImage(originFile, normalPath, position, watermarkText);
 		imageProcessor.generateThumbImage(originFile, thumbPath);
 
 

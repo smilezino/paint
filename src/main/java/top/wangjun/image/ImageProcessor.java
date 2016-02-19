@@ -10,6 +10,7 @@ import org.springframework.context.ApplicationContextAware;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 import top.wangjun.service.IConfigService;
+import top.wangjun.service.IProfileService;
 
 import javax.annotation.Resource;
 import java.io.File;
@@ -42,8 +43,6 @@ public class ImageProcessor implements InitializingBean {
 	@Value("#{servletContext.getRealPath('')}")
 	private String servletContextPath;
 
-	@Resource
-	private IConfigService configService;
 
 	public boolean isValid(String filename) {
 		String extension = null;
@@ -62,17 +61,15 @@ public class ImageProcessor implements InitializingBean {
 		return originFile;
 	}
 
-	public void generateNormalImage(File file, String filename, int watermark) throws IOException {
+	public void generateNormalImage(File file, String filename, WatermarkPosition position, String watermarkText) throws IOException {
 		Image image = new Image(file);
 		if(image.getWidth() > NORMAL_IMAGE_WIDTH) {
 			int height = this.calculateNormalHeight(image.getWidth(), image.getHeight());
 			image.resize(NORMAL_IMAGE_WIDTH, height);
 		}
 
-		WatermarkPosition position = WatermarkPosition.getPosition(watermark);
-
 		if(position != null) {
-			image.watermark(configService.getWatermarkText(), position);
+			image.watermark(watermarkText, position);
 		}
 
 		File normalFile = new File(servletContextPath + filename);

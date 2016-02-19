@@ -9,9 +9,5 @@ import top.wangjun.service.IConfigService;
  */
 
 @Service
-public class ConfigService implements IConfigService {
-	@Override
-	public String getWatermarkText() {
-		return "xxxx";
-	}
+public class ConfigServiceImpl implements IConfigService {
 }

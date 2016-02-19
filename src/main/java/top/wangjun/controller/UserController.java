@@ -40,12 +40,11 @@ public class UserController {
 	@RequestMapping(value = "login", method = RequestMethod.POST)
 	public String login(@RequestParam("identity") String identity,
 						@RequestParam("password") String password,
-						HttpServletRequest request,
 						HttpServletResponse response,
 						ModelMap modelMap) {
 		User user = this.userService.login(identity, password);
 		if(user != null) {
-			CookieUtils.setCookie(request, response, Constants.USER_COOKIE_TOKEN, UserUtils.encrypt(user), 30 * 24 * 60 * 60);
+			CookieUtils.setCookie(response, Constants.USER_COOKIE_TOKEN, UserUtils.encrypt(user), 30 * 24 * 60 * 60);
 			return "redirect:/";
 		} else {
 			modelMap.put("error", "用户名密码不正确");
