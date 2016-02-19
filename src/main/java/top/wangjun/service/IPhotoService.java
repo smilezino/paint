@@ -19,4 +19,7 @@ public interface IPhotoService {
 	public List<Photo> findByAlbum(Integer albumId);
 	public Page<Photo> findPageByAlbum(Integer albumId, Integer p, Integer ps);
 	public Photo upload(Photo photo, int watermark, MultipartFile file) throws IOException;
+
+	public void incrViewCount(Integer id);
+	public void incrDownloadCount(Integer id);
 }

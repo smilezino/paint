@@ -134,4 +134,14 @@ public class PhotoServiceImpl implements IPhotoService {
 		mapper.insertSelective(photo);
 		return photo;
 	}
+
+	@Override
+	public void incrViewCount(Integer id) {
+		mapper.incrViewCount(id);
+	}
+
+	@Override
+	public void incrDownloadCount(Integer id) {
+		mapper.incrDownloadCount(id);
+	}
 }

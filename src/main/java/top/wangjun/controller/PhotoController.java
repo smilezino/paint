@@ -2,6 +2,7 @@ package top.wangjun.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import top.wangjun.core.AuthRequired;
 import top.wangjun.core.CurrentUser;
+import top.wangjun.enums.Status;
 import top.wangjun.image.ImageProcessor;
 import top.wangjun.model.Album;
 import top.wangjun.model.Photo;
@@ -17,7 +19,10 @@ import top.wangjun.service.IAlbumService;
 import top.wangjun.service.IPhotoService;
 
 import javax.annotation.Resource;
-import java.io.IOException;
+import javax.servlet.http.HttpServletResponse;
+import java.io.*;
+import java.net.URLConnection;
+import java.net.URLEncoder;
 import java.util.List;
 
 /**
@@ -44,6 +49,8 @@ public class PhotoController {
 		}
 
 		Album album = albumService.findById(photo.getAlbum());
+
+		photoService.incrViewCount(id);
 
 		modelMap.put("album", album);
 		modelMap.put("photo", photo);
@@ -78,5 +85,31 @@ public class PhotoController {
 		List<Album> albums = albumService.queryByUserId(user.getId());
 		modelMap.put("albums", albums);
 		return "photo/upload";
+	}
+
+	@RequestMapping("/download")
+	public String download(@CurrentUser User user, @RequestParam("item") Integer id, HttpServletResponse response) throws IOException {
+		Photo photo = photoService.findById(id);
+
+		if(photo == null || (Status.CLOSE.getValue() == photo.getStatus() && user == null)) {
+			return "404";
+		}
+
+		photoService.incrDownloadCount(id);
+
+		File file = imageProcessor.readImage(photo.getOrigin());
+
+		String mimeType= URLConnection.guessContentTypeFromName(file.getName());
+		if(mimeType == null){
+			mimeType = "application/octet-stream";
+		}
+
+		response.setContentType(mimeType);
+		response.setHeader("Content-Disposition", "attachment; filename=\"" + URLEncoder.encode(photo.getFilename(), "utf-8") + "\"");
+		response.setContentLength((int)file.length());
+		InputStream inputStream = new BufferedInputStream(new FileInputStream(file));
+		FileCopyUtils.copy(inputStream, response.getOutputStream());
+
+		return null;
 	}
 }
