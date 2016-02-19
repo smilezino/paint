@@ -1,20 +1,16 @@
 package top.wangjun.image;
 
+import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang.time.DateFormatUtils;
-import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.ApplicationContextAware;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
-import top.wangjun.service.IConfigService;
-import top.wangjun.service.IProfileService;
+import top.wangjun.model.Photo;
 
-import javax.annotation.Resource;
+import java.awt.*;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -32,6 +28,7 @@ public class ImageProcessor implements InitializingBean {
 	public static final String PREFIX_ORIGIN = "origin";
 	public static final String PREFIX_NORMAL = "uploads";
 	public static final String PREFIX_THUMB = "uploads/thumb";
+	public static final String PREFIX_COVER = "uploads/cover";
 
 	public static final int NORMAL_IMAGE_WIDTH = 680;
 	public static final int THUMB_IMAGE_WIDTH = 340;
@@ -45,15 +42,12 @@ public class ImageProcessor implements InitializingBean {
 
 
 	public boolean isValid(String filename) {
-		String extension = null;
-		if(filename.length() > 0 && filename.lastIndexOf(".") > -1) {
-			extension = filename.substring(filename.lastIndexOf(".") + 1);
-		}
+		String extension = FilenameUtils.getExtension(filename);
 		return extension != null && this.imageTypes.contains(extension.toLowerCase());
 	}
 
-	public File saveOriginFile(MultipartFile file, String filename) throws IOException {
-		File originFile = new File(servletContextPath + filename);
+	public File saveOriginFile(MultipartFile file, String filepath) throws IOException {
+		File originFile = new File(servletContextPath + filepath);
 		if(!originFile.getParentFile().exists()) {
 			originFile.getParentFile().mkdirs();
 		}
@@ -61,7 +55,7 @@ public class ImageProcessor implements InitializingBean {
 		return originFile;
 	}
 
-	public void generateNormalImage(File file, String filename, WatermarkPosition position, String watermarkText) throws IOException {
+	public void generateNormalImage(File file, String filepath, WatermarkPosition position, String watermarkText) throws IOException {
 		Image image = new Image(file);
 		if(image.getWidth() > NORMAL_IMAGE_WIDTH) {
 			int height = this.calculateNormalHeight(image.getWidth(), image.getHeight());
@@ -72,12 +66,12 @@ public class ImageProcessor implements InitializingBean {
 			image.watermark(watermarkText, position);
 		}
 
-		File normalFile = new File(servletContextPath + filename);
+		File normalFile = new File(servletContextPath + filepath);
 		image.write(normalFile);
 
 	}
 
-	public void generateThumbImage(File file, String filename) throws IOException {
+	public void generateThumbImage(File file, String filepath) throws IOException {
 		Image originImage = new Image(file);
 
 		boolean isNeedCrop = originImage.getWidth() > THUMB_IMAGE_WIDTH || originImage.getHeight() > THUMB_IMAGE_HEIGHT;
@@ -105,11 +99,42 @@ public class ImageProcessor implements InitializingBean {
 			}
 		}
 
-		originImage.write(servletContextPath + filename);
+		originImage.write(servletContextPath + filepath);
+	}
+
+	public String generateAlbumCover(String filepath, Integer albumId, List<Photo> photos) throws IOException {
+
+		Image image = new Image(servletContextPath + filepath);
+
+		String name = albumId + "." + image.getImageExtension();
+		String filename = this.getFilePath(PREFIX_COVER, name);
+
+		image.createMergeArea(THUMB_IMAGE_WIDTH, THUMB_IMAGE_HEIGHT);
+
+		int size = photos.size();
+		for(int i=0; i<size; i++) {
+			Image merge = new Image(servletContextPath + photos.get(i).getThumb());
+			int x = (i + 1) * 10;
+			int y = (size - i - 1) * 10;
+			int width = THUMB_IMAGE_WIDTH - (2 * x);
+			int height = 10;
+			image.merge(merge, x, y, width, height);
+			image.fillRect(Color.WHITE, 0, y, x, height);
+			image.fillRect(Color.WHITE, width + x, y, THUMB_IMAGE_WIDTH - width - x, height);
+			image.fillRect(Color.WHITE, 0, (size - i) * 10 - 1, THUMB_IMAGE_WIDTH, 1);
+		}
+
+		image.write(servletContextPath + filename);
+		return filename;
+	}
+
+	public File readImage(String filepath) {
+		File file = new File(servletContextPath + filepath);
+		return file.exists() ? file : null;
 	}
 
 	public int calculateNormalHeight(int width, int height) {
-		return width < NORMAL_IMAGE_WIDTH ? height : (int) Math.round(height / IMAGE_WIDTH_HEIGHT_SCALE);
+		return width < NORMAL_IMAGE_WIDTH ? height : NORMAL_IMAGE_WIDTH * height / width;
 	}
 
 	public String getFilePath(String prefix, String filename) {
@@ -124,4 +149,5 @@ public class ImageProcessor implements InitializingBean {
 		imageTypes.add("jpg");
 		imageTypes.add("jpge");
 	}
+
 }

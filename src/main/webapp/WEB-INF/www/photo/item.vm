@@ -35,7 +35,7 @@
 
 	</div>
 </div>
-<div class="image" style="height: $!{photo.height}">
+<div class="image" style="height: $!{photo.height}px">
 	<img src="$photo.filepath"/>
 </div>
 <div class="intro">$!{photo.intro}</div>

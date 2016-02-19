@@ -56,4 +56,12 @@ public class AlbumServiceImpl implements IAlbumService {
 		List<Album> list = this.queryByUserId(userId);
 		return (Page<Album>) list;
 	}
+
+	@Override
+	public int updateCover(Integer albumId, String cover) {
+		Album record = new Album();
+		record.setId(albumId);
+		record.setCover(cover);
+		return mapper.updateByPrimaryKeySelective(record);
+	}
 }
