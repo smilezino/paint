@@ -5,11 +5,13 @@ import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Service;
 import tk.mybatis.mapper.entity.Example;
 import top.wangjun.dao.UserMapper;
+import top.wangjun.enums.Status;
 import top.wangjun.enums.UserType;
 import top.wangjun.model.User;
 import top.wangjun.service.IUserService;
 
 import javax.annotation.Resource;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -21,6 +23,16 @@ public class UserServiceImpl implements IUserService {
 
 	@Resource
 	private UserMapper mapper;
+
+	@Override
+	public User add(User user) {
+		user.setStatus((byte) Status.OPEN.getValue());
+		user.setCreateTime(new Date());
+		user.setUpdateTime(new Date());
+		user.setPwd(DigestUtils.md5Hex(user.getPwd()));
+		mapper.insertSelective(user);
+		return user;
+	}
 
 	@Override
 	public User login(Integer id, String password) {

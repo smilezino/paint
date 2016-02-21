@@ -9,6 +9,7 @@ import java.util.List;
  * @date 2016-02-08 19:53
  */
 public interface IUserService {
+	public User add(User user);
 	public User login(String usernameOrEmail, String password);
 	public User login(Integer id, String password);
 	public User admin();

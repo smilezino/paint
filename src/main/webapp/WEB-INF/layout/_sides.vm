@@ -2,9 +2,9 @@
 	<div class="side info">
 		<div class="avator">
 			<img src="$!user.avator"/>
-			<span class="name">$formatUtils.html($user.nickname)</span>
+			<span class="name">$!formatUtils.html($user.nickname)</span>
 		</div>
-		<div class="intro cell">$formatUtils.html($user.intro)</div>
+		<div class="intro cell">$!formatUtils.html($user.intro)</div>
 		<div class="creation cell">
 			<a href="/">
 				<span class="number">$photoCount</span>

@@ -30,6 +30,15 @@ public class CoreInterceptor extends HandlerInterceptorAdapter {
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
 
+		User admin = userService.admin();
+
+		if(admin == null) {
+			response.sendRedirect("/install");
+			return false;
+		}
+
+		request.setAttribute("admin", admin);
+
 		if(handler instanceof HandlerMethod) {
 			User user = this.getUser(request);
 			request.setAttribute(Constants.CURRENT_USER_KEY, user);
@@ -51,7 +60,8 @@ public class CoreInterceptor extends HandlerInterceptorAdapter {
 
 		if(!modelAndView.getViewName().contains("redirect")) {
 
-			User admin = userService.admin();
+			User admin = (User) request.getAttribute("admin");
+
 			modelAndView.addObject("user", admin);
 			modelAndView.addObject("login", this.getUser(request) != null);
 			modelAndView.addObject("today", new Date());
