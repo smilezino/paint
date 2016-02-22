@@ -14,26 +14,26 @@ import java.util.Properties;
 @Component
 public class ContextUtils implements ApplicationContextAware, InitializingBean {
 
-	private static ApplicationContext applicationContext;
+    private static ApplicationContext applicationContext;
 
-	private static Properties properties;
+    private static Properties properties;
 
-	public static Object getBean(String name) {
-		return applicationContext.getBean(name);
-	}
+    public static Object getBean(String name) {
+        return applicationContext.getBean(name);
+    }
 
-	public static String getProperty(String key) {
-		return (String) properties.get(key);
-	}
+    public static String getProperty(String key) {
+        return (String) properties.get(key);
+    }
 
 
-	@Override
-	public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
-		ContextUtils.applicationContext = applicationContext;
-	}
+    @Override
+    public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
+        ContextUtils.applicationContext = applicationContext;
+    }
 
-	@Override
-	public void afterPropertiesSet() throws Exception {
-		properties = (Properties) ContextUtils.applicationContext.getBean("properties");
-	}
+    @Override
+    public void afterPropertiesSet() throws Exception {
+        properties = (Properties) ContextUtils.applicationContext.getBean("properties");
+    }
 }

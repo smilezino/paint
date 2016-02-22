@@ -9,7 +9,7 @@ public class Config implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-	@Column(name = "`key`")
+    @Column(name = "`key`")
     private String key;
 
     private String field;

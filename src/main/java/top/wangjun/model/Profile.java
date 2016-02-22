@@ -11,7 +11,7 @@ public class Profile implements Serializable {
 
     private Integer user;
 
-	@Column(name = "`key`")
+    @Column(name = "`key`")
     private String key;
 
     private String value;

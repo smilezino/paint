@@ -48,6 +48,7 @@ public class Image {
 
     /**
      * 缩放
+     *
      * @param width
      * @param height
      * @return
@@ -63,6 +64,7 @@ public class Image {
 
     /**
      * 剪裁: 坐标, 宽高
+     *
      * @param x
      * @param y
      * @param width
@@ -77,6 +79,7 @@ public class Image {
 
     /**
      * 添加文字水印, 默认位置右下角
+     *
      * @param text
      * @return
      */
@@ -86,6 +89,7 @@ public class Image {
 
     /**
      * 添加水印
+     *
      * @param text
      * @param position
      * @return
@@ -123,6 +127,7 @@ public class Image {
 
     /**
      * 创建合并图片的区域
+     *
      * @param width
      * @param height
      * @return
@@ -138,6 +143,7 @@ public class Image {
 
     /**
      * 合并图片
+     *
      * @param image
      * @param x
      * @param y
@@ -160,6 +166,7 @@ public class Image {
 
     /**
      * 填充色块
+     *
      * @param color
      * @param x
      * @param y
@@ -181,24 +188,25 @@ public class Image {
     }
 
     public void write(File file) throws IOException {
-		if(!file.getParentFile().exists()) {
-			file.mkdirs();
-		}
-		Graphics2D graphics = this.bufferedImage.createGraphics();
-		graphics.setComposite(AlphaComposite.Src);
-		graphics.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
-		graphics.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
-		graphics.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+        if (!file.getParentFile().exists()) {
+            file.mkdirs();
+        }
+        Graphics2D graphics = this.bufferedImage.createGraphics();
+        graphics.setComposite(AlphaComposite.Src);
+        graphics.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
+        graphics.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
+        graphics.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         ImageIO.write(this.bufferedImage, this.getImageExtension(), file);
         this.bufferedImage = this.originImage;
     }
 
     /**
      * 获取拓展名
+     *
      * @return
      */
     public String getImageExtension() {
-        if(filename.length() > 0 && filename.lastIndexOf(".") > -1) {
+        if (filename.length() > 0 && filename.lastIndexOf(".") > -1) {
             return filename.substring(filename.lastIndexOf(".") + 1);
         }
         return "";
@@ -206,6 +214,7 @@ public class Image {
 
     /**
      * 计算水印坐标
+     *
      * @param imageWidth
      * @param imageHeight
      * @param textWidth
@@ -217,54 +226,54 @@ public class Image {
         int x = (imageWidth - textWidth) / 2;
         int y = (imageHeight - textHeight) / 2;
 
-        if(WatermarkPosition.CENTER.equals(position)) {
+        if (WatermarkPosition.CENTER.equals(position)) {
             y = (imageHeight + textHeight) / 2;
         }
 
-        if(WatermarkPosition.RIGHT_BOTTOM.equals(position)) {
-            if(x > DEFAULT_SPACING) {
+        if (WatermarkPosition.RIGHT_BOTTOM.equals(position)) {
+            if (x > DEFAULT_SPACING) {
                 x = imageWidth - textWidth - DEFAULT_SPACING;
             } else {
                 x = imageWidth - textWidth - x;
             }
 
-            if(y > DEFAULT_SPACING) {
+            if (y > DEFAULT_SPACING) {
                 y = imageHeight - DEFAULT_SPACING;
             } else {
                 y = imageHeight - y;
             }
         }
 
-        if(WatermarkPosition.RIGHT_TOP.equals(position)) {
-            if(x > DEFAULT_SPACING) {
+        if (WatermarkPosition.RIGHT_TOP.equals(position)) {
+            if (x > DEFAULT_SPACING) {
                 x = imageWidth - textWidth - DEFAULT_SPACING;
             } else {
                 x = imageWidth - textWidth - x;
             }
 
-            if(y > DEFAULT_SPACING) {
+            if (y > DEFAULT_SPACING) {
                 y = DEFAULT_SPACING + textHeight / 2;
             }
         }
 
-        if(WatermarkPosition.LEFT_BOTTOM.equals(position)) {
-            if(x > DEFAULT_SPACING) {
+        if (WatermarkPosition.LEFT_BOTTOM.equals(position)) {
+            if (x > DEFAULT_SPACING) {
                 x = DEFAULT_SPACING;
             }
 
-            if(y > DEFAULT_SPACING) {
+            if (y > DEFAULT_SPACING) {
                 y = imageHeight - DEFAULT_SPACING;
             } else {
                 y = imageHeight - y;
             }
         }
 
-        if(WatermarkPosition.LEFT_TOP.equals(position)) {
-            if(x > DEFAULT_SPACING) {
+        if (WatermarkPosition.LEFT_TOP.equals(position)) {
+            if (x > DEFAULT_SPACING) {
                 x = DEFAULT_SPACING;
             }
 
-            if(y > DEFAULT_SPACING) {
+            if (y > DEFAULT_SPACING) {
                 y = DEFAULT_SPACING + textHeight / 2;
             }
         }

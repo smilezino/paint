@@ -29,8 +29,8 @@ public class InstallController {
     @RequestMapping(value = "/install", method = RequestMethod.POST)
     public String install(User user) {
         User admin = userService.admin();
-        if(admin == null) {
-            user.setRole( (byte) UserType.ADMIN.getRole());
+        if (admin == null) {
+            user.setRole((byte) UserType.ADMIN.getRole());
             userService.add(user);
         }
         return "redirect:/";

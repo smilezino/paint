@@ -5,12 +5,12 @@
 
     <display-name>zino</display-name>
 
-	<listener>
-		<listener-class>org.springframework.web.util.Log4jConfigListener</listener-class>
-	</listener>
-	<listener>
-		<listener-class>org.springframework.web.context.request.RequestContextListener</listener-class>
-	</listener>
+    <listener>
+        <listener-class>org.springframework.web.util.Log4jConfigListener</listener-class>
+    </listener>
+    <listener>
+        <listener-class>org.springframework.web.context.request.RequestContextListener</listener-class>
+    </listener>
 
     <!-- utf-8编码 -->
     <filter>
@@ -31,14 +31,14 @@
     </filter-mapping>
 
     <!--<filter>-->
-        <!--<filter-name>UrlRewriteFilter</filter-name>-->
-        <!--<filter-class>org.tuckey.web.filters.urlrewrite.UrlRewriteFilter</filter-class>-->
+    <!--<filter-name>UrlRewriteFilter</filter-name>-->
+    <!--<filter-class>org.tuckey.web.filters.urlrewrite.UrlRewriteFilter</filter-class>-->
     <!--</filter>-->
     <!--<filter-mapping>-->
-        <!--<filter-name>UrlRewriteFilter</filter-name>-->
-        <!--<url-pattern>/*</url-pattern>-->
-        <!--<dispatcher>REQUEST</dispatcher>-->
-        <!--<dispatcher>FORWARD</dispatcher>-->
+    <!--<filter-name>UrlRewriteFilter</filter-name>-->
+    <!--<url-pattern>/*</url-pattern>-->
+    <!--<dispatcher>REQUEST</dispatcher>-->
+    <!--<dispatcher>FORWARD</dispatcher>-->
     <!--</filter-mapping>-->
 
     <!-- dispatcher servlet-->
@@ -57,18 +57,18 @@
         <url-pattern>/*</url-pattern>
     </servlet-mapping>
 
-	<error-page>
-		<error-code>404</error-code>
-		<location>/404</location>
-	</error-page>
+    <error-page>
+        <error-code>404</error-code>
+        <location>/404</location>
+    </error-page>
 
-	<error-page>
-		<error-code>500</error-code>
-		<location>/500</location>
-	</error-page>
+    <error-page>
+        <error-code>500</error-code>
+        <location>/500</location>
+    </error-page>
 
-	<error-page>
-		<exception-type>java.lang.Exception</exception-type>
-		<location>/500</location>
-	</error-page>
+    <error-page>
+        <exception-type>java.lang.Exception</exception-type>
+        <location>/500</location>
+    </error-page>
 </web-app>

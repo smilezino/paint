@@ -14,15 +14,15 @@ import static org.junit.Assert.*;
 @ContextConfiguration(locations = "classpath:spring-test-mapper.xml")
 public class ConfigMapperTest {
 
-	@Resource
-	private ConfigMapper mapper;
+    @Resource
+    private ConfigMapper mapper;
 
-	@Test
-	public void testInsert() throws Exception {
-		Config config = new Config();
-		config.setKey("key");
-		config.setValue("value");
-		mapper.insert(config);
+    @Test
+    public void testInsert() throws Exception {
+        Config config = new Config();
+        config.setKey("key");
+        config.setValue("value");
+        mapper.insert(config);
 
-	}
+    }
 }

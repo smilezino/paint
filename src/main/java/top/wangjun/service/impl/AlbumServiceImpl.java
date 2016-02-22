@@ -20,48 +20,48 @@ import java.util.List;
 @Service
 public class AlbumServiceImpl implements IAlbumService {
 
-	@Resource
-	private AlbumMapper mapper;
+    @Resource
+    private AlbumMapper mapper;
 
-	@Override
-	public Album findById(Integer id) {
-		return mapper.selectByPrimaryKey(id);
-	}
+    @Override
+    public Album findById(Integer id) {
+        return mapper.selectByPrimaryKey(id);
+    }
 
-	@Override
-	public int add(Album album) {
-		album.setCreateTime(new Date());
-		album.setUpdateTime(new Date());
-		album.setStatus((byte) Status.OPEN.getValue());
-		return mapper.insertSelective(album);
-	}
+    @Override
+    public int add(Album album) {
+        album.setCreateTime(new Date());
+        album.setUpdateTime(new Date());
+        album.setStatus((byte) Status.OPEN.getValue());
+        return mapper.insertSelective(album);
+    }
 
-	@Override
-	public int countByUserId(Integer userId) {
-		Album record = new Album();
-		record.setUser(userId);
-		return mapper.selectCount(record);
-	}
+    @Override
+    public int countByUserId(Integer userId) {
+        Album record = new Album();
+        record.setUser(userId);
+        return mapper.selectCount(record);
+    }
 
-	@Override
-	public List<Album> queryByUserId(Integer userId) {
-		Album record = new Album();
-		record.setUser(userId);
-		return mapper.select(record);
-	}
+    @Override
+    public List<Album> queryByUserId(Integer userId) {
+        Album record = new Album();
+        record.setUser(userId);
+        return mapper.select(record);
+    }
 
-	@Override
-	public Page<Album> queryPageByUserId(Integer userId, Integer p, Integer ps) {
-		PageHelper.startPage(p, ps, "id desc");
-		List<Album> list = this.queryByUserId(userId);
-		return (Page<Album>) list;
-	}
+    @Override
+    public Page<Album> queryPageByUserId(Integer userId, Integer p, Integer ps) {
+        PageHelper.startPage(p, ps, "id desc");
+        List<Album> list = this.queryByUserId(userId);
+        return (Page<Album>) list;
+    }
 
-	@Override
-	public int updateCover(Integer albumId, String cover) {
-		Album record = new Album();
-		record.setId(albumId);
-		record.setCover(cover);
-		return mapper.updateByPrimaryKeySelective(record);
-	}
+    @Override
+    public int updateCover(Integer albumId, String cover) {
+        Album record = new Album();
+        record.setId(albumId);
+        record.setCover(cover);
+        return mapper.updateByPrimaryKeySelective(record);
+    }
 }

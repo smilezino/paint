@@ -8,6 +8,7 @@ import java.lang.annotation.Target;
 @Target({ElementType.TYPE, ElementType.METHOD})
 @Retention(RetentionPolicy.RUNTIME)
 public @interface AuthRequired {
-	boolean login() default true;
-	boolean sign() default false;
+    boolean login() default true;
+
+    boolean sign() default false;
 }
