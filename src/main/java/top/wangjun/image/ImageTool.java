@@ -167,7 +167,7 @@ public class ImageTool implements InitializingBean {
         imageTypes = new ArrayList<>();
         imageTypes.add("png");
         imageTypes.add("jpg");
-        imageTypes.add("jpge");
+        imageTypes.add("jpeg");
     }
 
 }
