@@ -3,6 +3,7 @@ package top.wangjun.service.impl;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import org.springframework.stereotype.Service;
+import top.wangjun.core.Constants;
 import top.wangjun.dao.AlbumMapper;
 import top.wangjun.enums.Status;
 import top.wangjun.model.Album;
@@ -30,6 +31,7 @@ public class AlbumServiceImpl implements IAlbumService {
 
     @Override
     public int add(Album album) {
+        album.setCover(Constants.DEFALUT_ALBUM_COVER);
         album.setCreateTime(new Date());
         album.setUpdateTime(new Date());
         album.setStatus((byte) Status.OPEN.getValue());

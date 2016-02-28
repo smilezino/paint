@@ -58,7 +58,6 @@
 			<span class="label">图册集</span>
 			<div class="input-item">
 				<select name="album">
-					<option value="0">无</option>
 					#foreach($album in $albums)
 						<option value="$album.id">$album.name</option>
 					#end

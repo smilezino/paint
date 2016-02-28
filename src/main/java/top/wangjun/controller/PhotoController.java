@@ -72,6 +72,11 @@ public class PhotoController {
             return "photo/upload";
         }
 
+        if(photo.getAlbum() == null || photo.getAlbum() == 0) {
+            modelMap.put("error", "请先新建图册集");
+            return "photo/upload";
+        }
+
         //TODO: album 所有者校验
         photo.setUser(user.getId());
         photo = photoService.upload(photo, watermark, file);

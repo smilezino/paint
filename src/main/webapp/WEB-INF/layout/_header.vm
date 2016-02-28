@@ -9,8 +9,9 @@
 			</ul>
 		</div>
 		<div class="header-right">
-			<a href="#"><i class="fa fa-qq"></i> QQ</a>
-			<a href="#"><i class="fa fa-weibo"></i> 微博</a>
+			#if($stringUtils.isNotBlank($user.weibo))
+				<a href="http://weibo.com/u/${user.weibo}"><i class="fa fa-weibo"></i> 微博</a>
+			#end
 		</div>
 	</div>
 </div>
